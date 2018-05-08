@@ -1,12 +1,16 @@
 package com.uni.gdp.quiz_gdp;
 
-public class DataRepo
+import android.content.SharedPreferences;
+
+class DataRepo
 {
     static String name;
-    static int currentQuestion;
+	static int bestScore;
+	static int currentQuestion;
     static int currentPoints;
+	static SharedPreferences localData;
 
-    static Question[] questions;
+	static Question[] questions;
     static Leaderboard[] leaderboard;
 }
 
