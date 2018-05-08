@@ -31,6 +31,7 @@ public class ResultActivity extends AppCompatActivity {
 			SharedPreferences.Editor editor = DataRepo.localData.edit();
 			editor.putInt("best", DataRepo.currentPoints);
 			editor.apply();
+			DataRepo.bestScore = DataRepo.currentPoints;
 			tv_highscore.setVisibility(View.VISIBLE);
 		}
 		else { tv_highscore.setVisibility(View.GONE); }

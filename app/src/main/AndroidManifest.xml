@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainMenuActivity"
-            android:label="Hauptmenü"
+            android:label="Quiz"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuestionActivity"
-            android:label="Frage"/>
-        <activity android:name=".ResultActivity"
-            android:label="Ergebnis"/>
+        <activity
+            android:name=".QuestionActivity"
+            android:label="Frage" />
+        <activity
+            android:name=".ResultActivity"
+            android:label="Ergebnis" />
+        <activity android:name=".LeaderboardActivity"
+            android:label="Leaderboard"/>
     </application>
 
 </manifest>

@@ -2,11 +2,13 @@ package com.uni.gdp.quiz_gdp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class QuestionActivity extends AppCompatActivity
 {
@@ -16,6 +18,8 @@ public class QuestionActivity extends AppCompatActivity
     Button b_answer2;
     Button b_answer3;
     Button b_answer4;
+
+	boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -91,8 +95,31 @@ public class QuestionActivity extends AppCompatActivity
 			}
 			else
 			{
-				startActivity(new Intent(QuestionActivity.this, ResultActivity.class));
+				Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+				//intent.addFlags(Intent.);
+				startActivity(intent);
+				finish();
 			}
 		}
 	}
+
+	@Override
+	public void onBackPressed() {
+		if (doubleBackToExitPressedOnce) {
+			super.onBackPressed();
+			return;
+		}
+
+		this.doubleBackToExitPressedOnce = true;
+		Toast.makeText(this, "Drücken Sie noch einmal zurück um das Quiz abzubrechen", Toast.LENGTH_SHORT).show();
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run()
+			{
+				doubleBackToExitPressedOnce = false;
+			}
+		}, 3000);
+	}
+
 }
