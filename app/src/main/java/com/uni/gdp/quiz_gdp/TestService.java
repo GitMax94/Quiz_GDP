@@ -8,6 +8,7 @@ public class TestService
 
         for (int i = 0; i < questions.length; i++)
         {
+			questions[i] = new Question();
             questions[i].question = "Lorem ipsum dolor sit amet Question " + i + "?";
             questions[i].answers = new String[numberAnswers];
             for (int j = 0; j < questions[i].answers.length; j++)
@@ -15,6 +16,6 @@ public class TestService
                 questions[i].answers[j] = "TestAnswer " + i + " / " + j;
             }
         }
-
+		return questions;
     }
 }

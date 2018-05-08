@@ -7,12 +7,13 @@ public class DataRepo
     static int currentPoints;
 
     static Question[] questions;
-    static Leaderboard[] Leaderboard;
+    static Leaderboard[] leaderboard;
 }
 
 class Question
 {
     String question;
+    int correctId;
     String[] answers;
 }
 
