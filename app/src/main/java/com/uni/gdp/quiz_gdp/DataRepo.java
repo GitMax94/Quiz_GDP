@@ -5,12 +5,12 @@ import android.content.SharedPreferences;
 class DataRepo
 {
     static String name;
-	static int bestScore;
+	static int currentQuiz;
 	static int currentQuestion;
     static int currentPoints;
 	static SharedPreferences localData;
 
-	static Question[] questions;
+	static Quiz[] quizzes;
     static Leaderboard[] leaderboard;
 
     static String[] leaderboardToList()
@@ -20,7 +20,17 @@ class DataRepo
 		{
 			r[i] = (i+1) + ". " + (leaderboard[i].name.equals(name) ? ">> " : "") + leaderboard[i].name + " (" + leaderboard[i].points + ")";
 		}
-		r[r.length-1] = "Ihr Highscore: " + bestScore;
+		r[r.length-1] = "Ihr Highscore: " + 12;
+		return r;
+	}
+
+	static String[] quizzesToList()
+	{
+		String[] r = new String[quizzes.length];
+		for (int i = 0; i < r.length; i++)
+		{
+			r[i] = quizzes[i].name + " (" + quizzes[i].bestScore + " / " + quizzes[i].questions.length + " Fragen)";
+		}
 		return r;
 	}
 
@@ -31,6 +41,13 @@ class DataRepo
 		editor.putString("name", name);
 		editor.apply();
 	}
+}
+
+class Quiz
+{
+	String name;
+	int bestScore;
+	Question[] questions;
 }
 
 class Question

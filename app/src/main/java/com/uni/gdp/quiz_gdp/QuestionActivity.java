@@ -74,22 +74,22 @@ public class QuestionActivity extends AppCompatActivity
 	private void SetQuestion()
 	{
 		ab.setTitle("Frage " + (DataRepo.currentQuestion+1));
-		tv_question.setText(DataRepo.questions[DataRepo.currentQuestion].question);
-		b_answer1.setText(DataRepo.questions[DataRepo.currentQuestion].answers[0]);
-		b_answer2.setText(DataRepo.questions[DataRepo.currentQuestion].answers[1]);
-		b_answer3.setText(DataRepo.questions[DataRepo.currentQuestion].answers[2]);
-		b_answer4.setText(DataRepo.questions[DataRepo.currentQuestion].answers[3]);
+		tv_question.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].question);
+		b_answer1.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[0]);
+		b_answer2.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[1]);
+		b_answer3.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[2]);
+		b_answer4.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[3]);
 	}
 
 	private void Answer(int id)
 	{
-		if (DataRepo.currentQuestion < DataRepo.questions.length)
+		if (DataRepo.currentQuestion < DataRepo.quizzes[DataRepo.currentQuiz].questions.length)
 		{
 
-			if (DataRepo.questions[DataRepo.currentQuestion].correctId == id)
+			if (DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].correctId == id)
 				DataRepo.currentPoints++;
 			DataRepo.currentQuestion++;
-			if (DataRepo.currentQuestion < DataRepo.questions.length)
+			if (DataRepo.currentQuestion < DataRepo.quizzes[DataRepo.currentQuiz].questions.length)
 			{
 				SetQuestion();
 			}

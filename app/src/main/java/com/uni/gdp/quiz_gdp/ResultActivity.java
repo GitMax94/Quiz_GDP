@@ -24,19 +24,19 @@ public class ResultActivity extends AppCompatActivity {
 		tv_perfect = (TextView)findViewById(R.id.tv_perfect);
 		tv_highscore = (TextView)findViewById(R.id.tv_highscore);
 
-		tv_result.setText(DataRepo.currentPoints + " / " + DataRepo.questions.length);
+		tv_result.setText(DataRepo.currentPoints + " / " + DataRepo.quizzes[DataRepo.currentQuiz].questions.length);
 
-		if (DataRepo.bestScore < DataRepo.currentPoints)
+		if (DataRepo.quizzes[DataRepo.currentQuiz].bestScore < DataRepo.currentPoints)
 		{
 			SharedPreferences.Editor editor = DataRepo.localData.edit();
 			editor.putInt("best", DataRepo.currentPoints);
 			editor.apply();
-			DataRepo.bestScore = DataRepo.currentPoints;
+			DataRepo.quizzes[DataRepo.currentQuiz].bestScore = DataRepo.currentPoints;
 			tv_highscore.setVisibility(View.VISIBLE);
 		}
 		else { tv_highscore.setVisibility(View.GONE); }
 
-		if (DataRepo.currentPoints == DataRepo.questions.length)
+		if (DataRepo.currentPoints == DataRepo.quizzes[DataRepo.currentQuiz].questions.length)
 			 { tv_perfect.setVisibility(View.VISIBLE); }
 		else { tv_perfect.setVisibility(View.GONE); }
 

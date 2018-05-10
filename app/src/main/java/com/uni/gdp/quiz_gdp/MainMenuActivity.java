@@ -2,7 +2,6 @@ package com.uni.gdp.quiz_gdp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,12 +29,14 @@ public class MainMenuActivity extends AppCompatActivity
 		b_startquiz = (Button) findViewById(R.id.b_startquiz);
 		b_leaderboard = (Button) findViewById(R.id.b_leaderboard);
 
-		DataRepo.bestScore = DataRepo.localData.getInt("best", 0);
+
 		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
 		et_name.setText(DataRepo.name);
 
+		Toast.makeText(this, TestService.TestPHP(), LENGTH_SHORT).show();
+
 		//TODO Load properly, see DataRepo.java for classes
-		DataRepo.questions = TestService.MakeTestQuiz(12, 4);
+		DataRepo.quizzes = TestService.MakeTestQuizzes(20);
 		DataRepo.leaderboard = TestService.MakeTestLeaderboard(10);
 
 		b_startquiz.setOnClickListener( new View.OnClickListener()
@@ -46,10 +47,7 @@ public class MainMenuActivity extends AppCompatActivity
 				if (!et_name.getText().toString().equals(""))
 				{
 					DataRepo.setName(et_name.getText().toString());
-
-					DataRepo.currentQuestion = 0;
-					DataRepo.currentPoints = 0;
-					startActivity(new Intent(MainMenuActivity.this, QuestionActivity.class));
+					startActivity(new Intent(MainMenuActivity.this, SelectquizActivity.class));
 				}
 				else
 				{
