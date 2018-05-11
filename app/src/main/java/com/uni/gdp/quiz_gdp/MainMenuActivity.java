@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -22,14 +23,14 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MainMenuActivity extends AppCompatActivity
 {
-//test max
+
 	TextView et_name;
 	Button b_startquiz;
 	Button b_leaderboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
-	{ // test
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
 /*
@@ -45,7 +46,16 @@ $DateiSchreiben = fopen("Standortdaten.csv", "a");																							//In An
 		b_leaderboard = (Button) findViewById(R.id.b_leaderboard);
 
 		//Toast.makeText(this, "Start php", LENGTH_SHORT).show();
-		sendToServer(this);
+
+		//this.getClass().getMethod()
+
+		try {
+
+			Method method1 = MainMenuActivity.class.getMethod("test", (new Class[1])[0] = String.class);
+			PHPService.sendToServer(this, method1);
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
 
 		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
 		et_name.setText(DataRepo.name);
@@ -84,67 +94,19 @@ $DateiSchreiben = fopen("Standortdaten.csv", "a");																							//In An
         });
     }
 
-
-
-
-
-
-	public void sendToServer(final Context context)
+	void test(final String s)
 	{
-		new Thread(new Runnable()
-		{
+		runOnUiThread(new Runnable() {
 			@Override
-			public void run()
-			{
-				try
-				{
-					String webURL = "http://cbrell.de/bwi50205/172/op995204/QuizAuswertung.php";
-					String TextParameter = URLEncoder.encode(webURL, "UTF-8");
-
-					URL scriptURL = new URL(webURL);
-					HttpURLConnection HttpURLVerbindung = (HttpURLConnection) scriptURL.openConnection();
-					HttpURLVerbindung.setDoOutput(true);
-					HttpURLVerbindung.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-					HttpURLVerbindung.setFixedLengthStreamingMode(TextParameter.getBytes().length);
-
-					OutputStreamWriter outputStreamWriter = new OutputStreamWriter(HttpURLVerbindung.getOutputStream());
-					outputStreamWriter.write(TextParameter);
-					outputStreamWriter.flush();
-					outputStreamWriter.close();
-
-					InputStream answerInputStream = HttpURLVerbindung.getInputStream();
-
-					BufferedReader br = new BufferedReader(new InputStreamReader(answerInputStream));
-
-					final StringBuilder phpOutput = new StringBuilder();
-
-					String text = br.readLine();
-					while (text != null)
-					{
-						phpOutput.append(text + "\n");
-						text = br.readLine();
-					}
-
-					final String phpOutput2 = phpOutput.toString();
-
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							et_name.setText("PHP: " + phpOutput2);
-							Toast.makeText(context, phpOutput2.split("<br>")[phpOutput2.split("<br>").length-1], Toast.LENGTH_LONG).show();
-						}
-					});
-
-					answerInputStream.close();
-					HttpURLVerbindung.disconnect();
-				}
-				catch (Exception e)
-				{
-					//Toast.makeText(context, "Fuck PHP", Toast.LENGTH_LONG).show();
-				}
-
+			public void run() {
+				Toast.makeText(getBaseContext(), "Test: " + s, Toast.LENGTH_LONG).show();
 			}
-		}).start();
+		});
 	}
+
+
+
+
+
 
 }
