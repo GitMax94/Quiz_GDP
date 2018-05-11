@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.UUID;
+
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class LoginActivity extends AppCompatActivity {
@@ -34,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 			{
 				if (!et_name.getText().toString().equals(""))
 				{
-					DataRepo.setName(et_name.getText().toString(), "123456789");
+					DataRepo.setName(et_name.getText().toString(), UUID.randomUUID().toString());
 					startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
 				}
 				else

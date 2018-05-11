@@ -1,8 +1,6 @@
 package com.uni.gdp.quiz_gdp;
 
-import android.content.Context;
-import android.widget.Toast;
-
+import android.os.Handler;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +12,17 @@ import java.net.URLEncoder;
 
 public class PHPService
 {
+	final static Handler hbHandler = new Handler();
+	static Runnable heartbeat = new Runnable()
+	{
+		@Override
+		public void run()
+		{
+			sendToServer("?Nutzer_ID=" + DataRepo.uuid + "&Name=" + DataRepo.name, "", null, null);
+			hbHandler.postDelayed(heartbeat, 10000);
+		}
+	};
+
 
 	public static void sendToServer(final String phpParams, final String methodName, final MainMenuActivity mainMenu, final QuestionActivity question)
 	{
@@ -22,8 +31,7 @@ public class PHPService
 			@Override
 			public void run()
 			{
-				try
-				{
+				try {
 					String webURL = "http://cbrell.de/bwi50205/172/op995204/QuizAuswertung.php" + phpParams;
 					String TextParameter = URLEncoder.encode(webURL, "UTF-8");
 
@@ -45,8 +53,7 @@ public class PHPService
 					final StringBuilder phpOutput = new StringBuilder();
 
 					String text = br.readLine();
-					while (text != null)
-					{
+					while (text != null) {
 						phpOutput.append(text + "\n");
 						text = br.readLine();
 					}
@@ -56,15 +63,15 @@ public class PHPService
 					answerInputStream.close();
 					HttpURLVerbindung.disconnect();
 
-					if (mainMenu != null)
+					if (!methodName.isEmpty())
 					{
-						Method method = mainMenu.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
-						method.invoke(mainMenu, phpOutput.toString());
-					}
-					else if (question != null)
-					{
-						Method method = question.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
-						method.invoke(question, phpOutput.toString());
+						if (mainMenu != null) {
+							Method method = mainMenu.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
+							method.invoke(mainMenu, phpOutput.toString());
+						} else if (question != null) {
+							Method method = question.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
+							method.invoke(question, phpOutput.toString());
+						}
 					}
 				}
 				catch (Exception ignored) {}
