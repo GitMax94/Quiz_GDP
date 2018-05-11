@@ -24,6 +24,9 @@ public class MainMenuActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
 
+		DataRepo.name = "";
+		DataRepo.uuid = "";
+
 		DataRepo.localData = getSharedPreferences("data_local", Activity.MODE_PRIVATE);
 		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
 		DataRepo.uuid = DataRepo.localData.getString("uuid", DataRepo.uuid);

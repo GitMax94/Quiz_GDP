@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_login);
 
 
-		et_name = findViewById(R.id.tv_name);
+		et_name = findViewById(R.id.et_name);
 		b_login = (Button) findViewById(R.id.b_login);
 
 
