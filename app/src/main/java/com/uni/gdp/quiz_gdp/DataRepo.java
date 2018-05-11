@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 class DataRepo
 {
     static String name;
+    static String uuid;
 	static int currentQuiz;
 	static int currentQuestion;
     static int currentPoints;
@@ -43,11 +44,13 @@ class DataRepo
 		return r;
 	}
 
-	static void setName(String newName)
+	static void setName(String newName, String newUuid)
 	{
 		DataRepo.name = newName;
+		DataRepo.uuid = newUuid;
 		SharedPreferences.Editor editor = localData.edit();
 		editor.putString("name", name);
+		editor.putString("uuid", uuid);
 		editor.apply();
 	}
 }
