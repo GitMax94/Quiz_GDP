@@ -9,8 +9,11 @@ $array = FragenEinlesen();
 
 
 FragenSenden($array);
-
-function save()
+if(isset $Nutzer_ID)
+{
+save	
+}
+function save($Nutzer_ID,$Name,$Zeitstempel,$play)
 {
 	
 	$saveUserOnline =$Nutzer_Id.';'.$Name.';'.$Zeitstempel.';'.$play= "false".'\r\n';	
