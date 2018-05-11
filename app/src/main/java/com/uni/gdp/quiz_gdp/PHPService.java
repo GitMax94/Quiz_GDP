@@ -14,31 +14,7 @@ import java.net.URLEncoder;
 
 public class PHPService
 {
-	/*
-	    //Runnable: Wird benötigt damit der Thread weiß, was er ausführen soll
-    Runnable aktualisierungsTask = new Runnable() {
-        @Override
-        public void run() {
-            //Die Methode getLocation ruft die Standortdaten auf
-            getLocation();
-            //Die Methode sendToServer sendet die Daten zum Webserver, der Übergebene String bleidt ungenutzt
-            sendToServer();
-            //Pausiert den Thread um Aktualisierungsintervall*1000
-            aktualisieren.postDelayed(aktualisierungsTask, aktualisierungsintevall *1000);
-        }
-    };    //Runnable: Wird benötigt damit der Thread weiß, was er ausführen soll
-    Runnable aktualisierungsTask = new Runnable() {
-        @Override
-        public void run() {
-            //Die Methode getLocation ruft die Standortdaten auf
-            getLocation();
-            //Die Methode sendToServer sendet die Daten zum Webserver, der Übergebene String bleidt ungenutzt
-            sendToServer();
-            //Pausiert den Thread um Aktualisierungsintervall*1000
-            aktualisieren.postDelayed(aktualisierungsTask, aktualisierungsintevall *1000);
-        }
-    };
-	 */
+
 	public static void sendToServer(final String phpParams, final String methodName, final MainMenuActivity mainMenu, final QuestionActivity question)
 	{
 		new Thread(new Runnable()
