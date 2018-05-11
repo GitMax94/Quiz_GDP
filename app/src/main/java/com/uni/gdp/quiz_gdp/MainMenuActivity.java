@@ -49,13 +49,8 @@ $DateiSchreiben = fopen("Standortdaten.csv", "a");																							//In An
 
 		//this.getClass().getMethod()
 
-		try {
+		PHPService.sendToServer("", "test", this, null);
 
-			Method method1 = MainMenuActivity.class.getMethod("test", (new Class[1])[0] = String.class);
-			PHPService.sendToServer(this, method1);
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
 
 		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
 		et_name.setText(DataRepo.name);

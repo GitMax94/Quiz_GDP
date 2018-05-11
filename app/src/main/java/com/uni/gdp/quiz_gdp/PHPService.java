@@ -12,14 +12,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-/**
- * Created by Max on 2018-05-11.
- */
-
 public class PHPService
 {
 
-	public static void sendToServer(final Object object, final Method method)
+	public static void sendToServer(final String phpParams, final String methodName, final MainMenuActivity mainMenu, final QuestionActivity question)
 	{
 		new Thread(new Runnable()
 		{
@@ -28,7 +24,7 @@ public class PHPService
 			{
 				try
 				{
-					String webURL = "http://cbrell.de/bwi50205/172/op995204/QuizAuswertung.php";
+					String webURL = "http://cbrell.de/bwi50205/172/op995204/QuizAuswertung.php" + phpParams;
 					String TextParameter = URLEncoder.encode(webURL, "UTF-8");
 
 					URL scriptURL = new URL(webURL);
@@ -60,24 +56,18 @@ public class PHPService
 					answerInputStream.close();
 					HttpURLVerbindung.disconnect();
 
-					method.invoke(object, phpOutput.toString());
-
-
-					/*
-					MainMenuActivity.runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							et_name.setText("PHP: " + phpOutput2);
-							Toast.makeText(context, phpOutput2.split("<br>")[phpOutput2.split("<br>").length-1], Toast.LENGTH_LONG).show();
-						}
-					});*/
-
-
+					if (mainMenu != null)
+					{
+						Method method = mainMenu.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
+						method.invoke(mainMenu, phpOutput.toString());
+					}
+					else if (question != null)
+					{
+						Method method = question.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
+						method.invoke(question, phpOutput.toString());
+					}
 				}
-				catch (Exception e)
-				{
-					//Toast.makeText(context, "Fuck PHP", Toast.LENGTH_LONG).show();
-				}
+				catch (Exception ignored) {}
 
 			}
 		}).start();
