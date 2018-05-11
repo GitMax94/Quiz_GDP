@@ -3,7 +3,7 @@ $Nutzer_ID = $_GET['Nutzer_ID'];
 $Name = $_GET['Name'];
 $Zeitstempel = time();
 $play= "false";	
-dg
+
 
 $array = FragenEinlesen();
 
