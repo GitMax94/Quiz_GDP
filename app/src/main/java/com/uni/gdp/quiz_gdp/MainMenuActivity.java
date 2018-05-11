@@ -32,13 +32,7 @@ public class MainMenuActivity extends AppCompatActivity
 	{ // test
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
-/*
 
-$DateiSchreiben = fopen("Standortdaten.csv", "a");																							//In Anlehnung an Folien-HTML-und-PHP-komplett Von Prof.Dr. Brell S.15
-	fwrite($DateiSchreiben, $MeetMeCsvTextZeile);
-	fclose($DateiSchreiben); 
-
- */
 		DataRepo.localData = getSharedPreferences("data_local", Activity.MODE_PRIVATE);
 		et_name = (TextView)findViewById(R.id.et_name);
 		b_startquiz = (Button) findViewById(R.id.b_startquiz);
