@@ -13,6 +13,7 @@ $anwendung  = $_GET["anwendung"];
 if($anwendung == "F"){
 	$array = FragenEinlesen();
 	FragenSenden($array);
+	punkte();
 }
 
 if($anwendung == "S"){
@@ -28,19 +29,24 @@ function punkte(){
 			$array[$zeile] = $csvLesen; 																										
 			$zeile++;
 		}
-	$a = 1;	
-	while($nutzerFrage != $array[$zeile][$a]){
-		$a+=5;
-		$b=2;
-		while($nutzerEingabe != $array[$zeile][$b]){
-			$punkte = $Nutzer_ID.';'.$Name.';'.$Zeitstempel.';'.$play."\r\n";	
-			$punkteCSV = fopen("Punkte.csv", "a");																							
-			fwrite($punkteCSV, $punkte);
-			fclose($punkteCSV);
-			$b+=6;
+		$LaengeArray = count($csvLesen);
+		$a = 1;	
+		$c = 0;
+		while($nutzerFrage != $array[$c][$a]){
+			$a+=5;
+			$b=2;
+			$c++;
+			$d=0;
+			while($nutzerEingabe != $array[$d][$b]){
+				$d++;
+				$punkte = $Nutzer_ID.';'.$Name.';'.$Zeitstempel.';'.$play."\r\n";	
+				$punkteCSV = fopen("Punkte.csv", "a");																							
+				fwrite($punkteCSV, $punkte);
+				fclose($punkteCSV);
+				$b+=6;
+			}
 		}
-	}
-	
+	}	
 }
 
 if(isset($Nutzer_ID)){
