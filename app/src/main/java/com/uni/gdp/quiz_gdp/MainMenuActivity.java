@@ -33,29 +33,16 @@ public class MainMenuActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
-/*
 
-$DateiSchreiben = fopen("Standortdaten.csv", "a");																							//In Anlehnung an Folien-HTML-und-PHP-komplett Von Prof.Dr. Brell S.15
-	fwrite($DateiSchreiben, $MeetMeCsvTextZeile);
-	fclose($DateiSchreiben); 
-
- */
 		DataRepo.localData = getSharedPreferences("data_local", Activity.MODE_PRIVATE);
 		et_name = (TextView)findViewById(R.id.et_name);
 		b_startquiz = (Button) findViewById(R.id.b_startquiz);
 		b_leaderboard = (Button) findViewById(R.id.b_leaderboard);
 
-		//Toast.makeText(this, "Start php", LENGTH_SHORT).show();
-
-		//this.getClass().getMethod()
-
 		PHPService.sendToServer("", "test", this, null);
-
 
 		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
 		et_name.setText(DataRepo.name);
-
-		//Toast.makeText(this, TestService.TestPHP(), LENGTH_SHORT).show();
 
 		//TODO Load properly, see DataRepo.java for classes
 		DataRepo.quizzes = TestService.MakeTestQuizzes(20);
