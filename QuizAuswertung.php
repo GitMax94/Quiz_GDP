@@ -16,7 +16,7 @@ save($Nutzer_ID,$Name,$Zeitstempel,$play);
 function save($Nutzer_ID,$Name,$Zeitstempel,$play)
 {
 	
-	$saveUserOnlineRow = $Nutzer_Id.';'.$Name.';'.$Zeitstempel.';'.$play= "false".'\r\n';	
+	$saveUserOnlineRow = $Nutzer_Id.';'.$Name.';'.$Zeitstempel.';'.$play."\r\n";	
 	$saveUserOnline = fopen("Spieler.csv", "a");																							//In Anlehnung an Folien-HTML-und-PHP-komplett Von Prof.Dr. Brell S.15
 	fwrite($saveUserOnline, $saveUserOnlineRow);
 	fclose($saveUserOnline); 
