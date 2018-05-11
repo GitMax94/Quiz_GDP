@@ -22,14 +22,14 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MainMenuActivity extends AppCompatActivity
 {
-//test max
+
 	TextView et_name;
 	Button b_startquiz;
 	Button b_leaderboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
-	{ // test
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
 
