@@ -12,7 +12,22 @@ class DataRepo
 	static SharedPreferences localData;
 
 	static Quiz[] quizzes;
+	static Player[] players;
     static Leaderboard[] leaderboard;
+
+
+    static void setPlayers(String text)
+	{
+
+
+
+
+
+
+
+
+
+	}
 
     static String[] leaderboardToList()
 	{
@@ -67,6 +82,12 @@ class Question
     String question;
     int correctId;
     String[] answers;
+}
+
+class Player
+{
+	String name;
+	String uuid;
 }
 
 class Leaderboard

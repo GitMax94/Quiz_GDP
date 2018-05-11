@@ -1,6 +1,9 @@
 package com.uni.gdp.quiz_gdp;
 
+import android.os.Debug;
 import android.os.Handler;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,7 +21,8 @@ public class PHPService
 		@Override
 		public void run()
 		{
-			sendToServer("?Nutzer_ID=" + DataRepo.uuid + "&Name=" + DataRepo.name, "", null, null);
+			sendToServer("?anwendung=S&Nutzer_ID=" + DataRepo.uuid + "&Name=" + DataRepo.name, "", null, null);
+			Log.i("PHP", "heartbeat now");
 			hbHandler.postDelayed(heartbeat, 10000);
 		}
 	};
