@@ -20,7 +20,7 @@ class DataRepo
 		{
 			r[i] = (i+1) + ". " + (leaderboard[i].name.equals(name) ? ">> " : "") + leaderboard[i].name + " (" + leaderboard[i].points + ")";
 		}
-		r[r.length-1] = "Ihr Highscore: " + 12;
+		r[r.length-1] = "Ihr Highscore: " + DataRepo.getTotalBestScore();
 		return r;
 	}
 
@@ -30,6 +30,15 @@ class DataRepo
 		for (int i = 0; i < r.length; i++)
 		{
 			r[i] = quizzes[i].name + " (" + quizzes[i].bestScore + " / " + quizzes[i].questions.length + " Fragen)";
+		}
+		return r;
+	}
+
+	static int getTotalBestScore()
+	{
+		int r = 0;
+		for (Quiz quiz : quizzes) {
+			r += quiz.bestScore;
 		}
 		return r;
 	}

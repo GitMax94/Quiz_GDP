@@ -1,9 +1,14 @@
 package com.uni.gdp.quiz_gdp;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Random;
 
 class TestService
@@ -46,10 +51,13 @@ class TestService
 		{
 			r[i] = new Leaderboard();
 			r[i].name = "EntryName " + i;
-			r[i].points = i;
+			r[i].points = i+13;
 		}
 		return r;
 	}
+
+	private static Context staticcontext;
+
 
 	static String TestPHP()
 	{
