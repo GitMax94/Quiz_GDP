@@ -22,7 +22,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MainMenuActivity extends AppCompatActivity
 {
-
+//test max
 	TextView et_name;
 	Button b_startquiz;
 	Button b_leaderboard;
