@@ -1,13 +1,26 @@
 <?php
 $Nutzer_ID = $_GET['Nutzer_ID'];
 $Name = $_GET['Name'];
-$Zeitstempel = time();	
+$Zeitstempel = time();
+$play= "false";	
 
 
 $array = FragenEinlesen();
 
 
 FragenSenden($array);
+if(isset($Nutzer_ID))
+{
+save($Nutzer_ID,$Name,$Zeitstempel,$play);	
+}
+function save($Nutzer_ID,$Name,$Zeitstempel,$play)
+{
+	
+	$saveUserOnline =$Nutzer_Id.';'.$Name.';'.$Zeitstempel.';'.$play= "false".'\r\n';	
+	$saveUserOnline = fopen("Spieler.csv", "a");																							//In Anlehnung an Folien-HTML-und-PHP-komplett Von Prof.Dr. Brell S.15
+	fwrite($saveUserOnline, $saveUserOnlineRow);
+	fclose($saveUserOnline); 
+}
 
 function FragenSenden($array){
 	if(file_exists("Fragen.csv")){// prueft ob datei da ist
