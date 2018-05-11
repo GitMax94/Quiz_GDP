@@ -9,15 +9,15 @@ $array = FragenEinlesen();
 
 
 FragenSenden($array);
-if(isset $Nutzer_ID)
+if(isset($Nutzer_ID))
 {
-save	
+save($Nutzer_ID,$Name,$Zeitstempel,$play);	
 }
 function save($Nutzer_ID,$Name,$Zeitstempel,$play)
 {
 	
 	$saveUserOnline =$Nutzer_Id.';'.$Name.';'.$Zeitstempel.';'.$play= "false".'\r\n';	
-	$saveUserOnline = fopen("Standortdaten.csv", "a");																							//In Anlehnung an Folien-HTML-und-PHP-komplett Von Prof.Dr. Brell S.15
+	$saveUserOnline = fopen("Spieler.csv", "a");																							//In Anlehnung an Folien-HTML-und-PHP-komplett Von Prof.Dr. Brell S.15
 	fwrite($saveUserOnline, $saveUserOnlineRow);
 	fclose($saveUserOnline); 
 }
