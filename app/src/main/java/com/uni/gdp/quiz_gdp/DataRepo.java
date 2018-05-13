@@ -21,13 +21,19 @@ class DataRepo
 		String[] lines = text.split("<br>");
 		DataRepo.players = new Player[lines.length-1];
 
-		for (int i = 0; i < lines.length-1; i++)
+		int j = 0;
+		for (int i = 0; i < lines.length; i++)
 		{
 			String[] line = lines[i].split(";");
-			DataRepo.players[i] = new Player();
-
-			DataRepo.players[i].uuid = line[0];
-			DataRepo.players[i].name = line[1];
+			if (line[0].trim().equals(uuid)) {
+				j = 1;
+			}
+			else
+			{
+				DataRepo.players[i - j] = new Player();
+				DataRepo.players[i - j].uuid = line[0].trim();
+				DataRepo.players[i - j].name = line[1].trim();
+			}
 		}
 	}
 

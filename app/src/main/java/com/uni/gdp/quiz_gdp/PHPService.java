@@ -21,7 +21,7 @@ public class PHPService
 		@Override
 		public void run()
 		{
-			//sendToServer("?anwendung=S&Nutzer_ID=" + DataRepo.uuid + "&Name=" + DataRepo.name, "", null, null, null);
+			sendToServer("?anwendung=S&Nutzer_ID=" + DataRepo.uuid + "&Name=" + DataRepo.name, "", null, null, null);
 			Log.i("PHP", "heartbeat now");
 			hbHandler.postDelayed(heartbeat, 10000);
 		}
