@@ -1,26 +1,31 @@
 <?php
 
 $Nutzer_ID = $_GET['Nutzer_ID'];
+$spielId = $_GET['spielId'];
+
+
 $Name = $_GET['Name'];
 $Zeitstempel = time();
 $play= "false";	
 
 $nutzerEingabe = $_GET["nutzerEingabe"];
 $nutzerFrage = $_GET["nutzerFrage"];
+$Quiz_ID = $_GET["Quiz_ID"];
 
 $anwendung  = $_GET["anwendung"];
 
 if($anwendung == "F"){
 	$array = FragenEinlesen();
 	FragenSenden($array);
-	punkte();
 }
 
 if($anwendung == "S"){
 	PlayerOnline();
 }
 
-function punkte(){
+punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $Quiz_ID);
+
+function punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $Quiz_ID){
 	if(file_exists("Fragen.csv")){
 		$zeile = 0; 
 		$array = array();
@@ -30,27 +35,33 @@ function punkte(){
 			$zeile++;
 		}
 		$LaengeArray = count($csvLesen);
-		$a = 1;	
-		$c = 0;
-		while($nutzerFrage != $array[$c][$a]){
-			$a+=5;
-			$b=2;
-			$c++;
-			$d=0;
-			while($nutzerEingabe != $array[$d][$b]){
-				$d++;
-				$punkte = $Nutzer_ID.';'.$Name.';'.$Zeitstempel.';'.$play."\r\n";	
-				$punkteCSV = fopen("Punkte.csv", "a");																							
-				fwrite($punkteCSV, $punkte);
-				fclose($punkteCSV);
+		$a=0;
+		while($a<$LaengeArray){
+			if($Quiz_ID == $array[$a][0]){
+				$b=1;
+				while($nutzerFrage != $array[$a][$b]){
+					$c=3;
+					while($nutzerEingabe != $array[$a][$c]){
+						$punkte = $Nutzer_ID.';'.$Name.';'.$Zeitstempel.';'.$play."\r\n";	
+						$punkteCSV = fopen("Punkte.csv", "a");																							
+						fwrite($punkteCSV, $punkte);
+						fclose($punkteCSV);
+					}
+					$c++;
+				}
 				$b+=6;
 			}
+			$a++;
 		}
 	}	
 }
 
 if(isset($Nutzer_ID)){
 	save($Nutzer_ID,$Name,$Zeitstempel,$play);	
+}
+
+if(isset($spielId)){
+	echo $spielId;
 }
 
 function save($Nutzer_ID,$Name,$Zeitstempel,$play){
