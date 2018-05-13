@@ -22,10 +22,15 @@ class DataRepo
 		DataRepo.players = new Player[lines.length-1];
 
 		int j = 0;
-		for (int i = 0; i < lines.length; i++)
+		for (int i = 0; i < lines.length-1; i++)
 		{
 			String[] line = lines[i].split(";");
-			if (line[0].trim().equals(uuid)) {
+
+			DataRepo.players[i - j] = new Player();
+			DataRepo.players[i - j].name = lines[i].trim();
+
+			/*
+			if (line[0].trim().equals(uuid) && false) {
 				j = 1;
 			}
 			else
@@ -33,7 +38,7 @@ class DataRepo
 				DataRepo.players[i - j] = new Player();
 				DataRepo.players[i - j].uuid = line[0].trim();
 				DataRepo.players[i - j].name = line[1].trim();
-			}
+			}*/
 		}
 	}
 

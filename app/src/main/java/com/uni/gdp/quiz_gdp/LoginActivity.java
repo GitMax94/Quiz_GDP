@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 			{
 				if (!et_name.getText().toString().equals(""))
 				{
-					DataRepo.setName(et_name.getText().toString(), UUID.randomUUID().toString());
+					DataRepo.setName(et_name.getText().toString().replace(";", " "), UUID.randomUUID().toString());
 					startActivity(new Intent(LoginActivity.this, MainMenuActivity.class));
 				}
 				else

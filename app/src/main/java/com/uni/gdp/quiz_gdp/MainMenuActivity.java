@@ -1,8 +1,12 @@
 package com.uni.gdp.quiz_gdp;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +28,7 @@ public class MainMenuActivity extends AppCompatActivity
 
 		DataRepo.name = "";
 		DataRepo.uuid = "";
+
 
 		DataRepo.localData = getSharedPreferences("data_local", Activity.MODE_PRIVATE);
 		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
