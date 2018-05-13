@@ -30,8 +30,12 @@
         <activity
             android:name=".LeaderboardActivity"
             android:label="Leaderboard" />
-        <activity android:name=".SelectquizActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SelectquizActivity"
+            android:label="Wähle Kategorie" />
+        <activity android:name=".LoginActivity"
+            android:label="Willkommen" />
+        <activity android:name=".SelectPlayerActivity"
+            android:label="Wähle Gegenspieler" />
     </application>
 
 </manifest>

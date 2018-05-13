@@ -18,15 +18,17 @@ class DataRepo
 
     static void setPlayers(String text)
 	{
+		String[] lines = text.split("<br>");
+		DataRepo.players = new Player[lines.length-1];
 
+		for (int i = 0; i < lines.length-1; i++)
+		{
+			String[] line = lines[i].split(";");
+			DataRepo.players[i] = new Player();
 
-
-
-
-
-
-
-
+			DataRepo.players[i].uuid = line[0];
+			DataRepo.players[i].name = line[1];
+		}
 	}
 
     static String[] leaderboardToList()
