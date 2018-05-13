@@ -7,20 +7,22 @@ $play= "false";
 
 $nutzerEingabe = $_GET["nutzerEingabe"];
 $nutzerFrage = $_GET["nutzerFrage"];
+$Quiz_ID = $_GET["Quiz_ID"];
 
 $anwendung  = $_GET["anwendung"];
 
 if($anwendung == "F"){
 	$array = FragenEinlesen();
 	FragenSenden($array);
-	punkte();
 }
 
 if($anwendung == "S"){
 	PlayerOnline();
 }
 
-function punkte(){
+//punkte($Quiz_ID);
+
+function punkte($Quiz_ID){
 	if(file_exists("Fragen.csv")){
 		$zeile = 0; 
 		$array = array();
@@ -30,7 +32,24 @@ function punkte(){
 			$zeile++;
 		}
 		$LaengeArray = count($csvLesen);
-		$a = 1;	
+		$a=0;
+		while($a<$LaengeArray){
+			if($Quiz_ID == $array[$a][0]){
+				$b=1;
+				while($nutzerFrage != $array[$a][$b]){
+					$c=3;
+					while($nutzerEingabe != $array[$a][$c]){
+						
+					}
+					$c++;
+				}
+				$b+=6;
+			}
+			$a++;
+		}
+		
+		
+		/*$a = 1;	
 		$c = 0;
 		while($nutzerFrage != $array[$c][$a]){
 			$a+=5;
@@ -45,7 +64,7 @@ function punkte(){
 				fclose($punkteCSV);
 				$b+=6;
 			}
-		}
+		}*/
 	}	
 }
 
