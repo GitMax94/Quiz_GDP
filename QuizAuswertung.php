@@ -1,6 +1,9 @@
 <?php
 
 $Nutzer_ID = $_GET['Nutzer_ID'];
+$spielId = $_GET['spielId'];
+
+
 $Name = $_GET['Name'];
 $Zeitstempel = time();
 $play= "false";	
@@ -33,7 +36,6 @@ function punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $
 		}
 		$LaengeArray = count($csvLesen);
 		$a=0;
-		echo "test";
 		while($a<$LaengeArray){
 			if($Quiz_ID == $array[$a][0]){
 				$b=1;
@@ -56,6 +58,10 @@ function punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $
 
 if(isset($Nutzer_ID)){
 	save($Nutzer_ID,$Name,$Zeitstempel,$play);	
+}
+
+if(isset($spielId)){
+	echo $spielId;
 }
 
 function save($Nutzer_ID,$Name,$Zeitstempel,$play){
