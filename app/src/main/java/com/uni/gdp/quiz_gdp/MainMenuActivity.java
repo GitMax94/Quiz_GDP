@@ -3,17 +3,11 @@ package com.uni.gdp.quiz_gdp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.UUID;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class MainMenuActivity extends AppCompatActivity
 {
@@ -41,9 +35,9 @@ public class MainMenuActivity extends AppCompatActivity
 			finish();
 		}
 
-		PHPService.sendToServer("?anwendung=F", "setQuizzes", this, null);
+		PHPService.sendToServer("?anwendung=F", "setQuizzes", this, null, null);
 
-		//PHPService.heartbeat.run();
+		PHPService.heartbeat.run();
 
 
 

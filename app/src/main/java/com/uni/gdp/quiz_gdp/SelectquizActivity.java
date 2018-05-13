@@ -8,8 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 public class SelectquizActivity extends AppCompatActivity {
 
 	ListView lv_quizzes;
@@ -32,7 +30,7 @@ public class SelectquizActivity extends AppCompatActivity {
 				DataRepo.currentQuiz = position;
 				DataRepo.currentQuestion = 0;
 				DataRepo.currentPoints = 0;
-				startActivity(new Intent(SelectquizActivity.this, QuestionActivity.class));
+				startActivity(new Intent(SelectquizActivity.this, SelectPlayerActivity.class));
 			}
 		});
 
