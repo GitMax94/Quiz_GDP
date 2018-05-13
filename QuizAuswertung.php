@@ -23,7 +23,7 @@ if($anwendung == "S"){
 	PlayerOnline();
 }
 
-punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $Quiz_ID);
+//punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $Quiz_ID);
 
 function punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $Quiz_ID){
 	if(file_exists("Fragen.csv")){
@@ -34,9 +34,8 @@ function punkte($Nutzer_ID, $Name, $Zeitstempel, $nutzerEingabe, $nutzerFrage, $
 			$array[$zeile] = $csvLesen; 																										
 			$zeile++;
 		}
-		$LaengeArray = count($csvLesen);
 		$a=0;
-		while($a<$LaengeArray){
+		while($a<$zeile){
 			if($Quiz_ID == $array[$a][0]){
 				$b=1;
 				while($nutzerFrage != $array[$a][$b]){
@@ -82,12 +81,12 @@ function PlayerOnline(){
 		}
 		$i=0;
 		$LaengeArray = count($array); 
-		while($i<$array){
+		while($i<$LaengeArray){
 			$Zeitstempel2 = time();
 			$Differenz = $Zeitstempel2 - $array[$i][2]; 
-			if($Differenz < 5){
+			if($Differenz < 10){
 				if($array[$i][3]=="false"){
-					echo $array[$i][1];
+					echo $array[$i][0].";".$array[$i][1];
 				}
 			}
 		$i++;}																											
