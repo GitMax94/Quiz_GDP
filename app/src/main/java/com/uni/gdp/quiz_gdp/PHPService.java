@@ -22,7 +22,7 @@ public class PHPService
 		@Override
 		public void run()
 		{
-			sendToServer("?func=heartbeat&userId=" + DataRepo.uuid, "", null, null, null, resultAct);
+			sendToServer("?func=heartbeat&userId=" + DataRepo.uuid, "checkOpponent", null, null, null, resultAct);
 			Log.i("PHP", "heartbeat now");
 			hbHandler.postDelayed(heartbeat, 10000);
 		}
