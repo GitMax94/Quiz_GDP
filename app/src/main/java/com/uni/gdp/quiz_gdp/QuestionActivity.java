@@ -89,6 +89,12 @@ public class QuestionActivity extends AppCompatActivity
 			if (DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].correctId == id)
 				DataRepo.currentPoints++;
 			DataRepo.currentQuestion++;
+
+			String phpCurrentQuestion = DataRepo.currentQuestion == DataRepo.quizzes[DataRepo.currentQuiz].questions.length-1 ? "last" : DataRepo.currentQuestion + "";
+			String phpIsCorrect = DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].correctId == id ? "true" : "false";
+
+			PHPService.sendToServer("?func=answer?userName=" + DataRepo.name + "?questionId=" + phpCurrentQuestion  + "?answerId=" + id + "?isCorrect=" + phpIsCorrect + "?totalPoints=" + DataRepo.currentPoints, "", null, null, null, null);
+
 			if (DataRepo.currentQuestion < DataRepo.quizzes[DataRepo.currentQuiz].questions.length)
 			{
 				SetQuestion();

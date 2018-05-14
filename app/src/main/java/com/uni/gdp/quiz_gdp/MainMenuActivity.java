@@ -122,18 +122,16 @@ public class MainMenuActivity extends AppCompatActivity
 		{
 			case "1":
 				DataRepo.playerId = 1;
-				tv_message_p2.setVisibility(View.INVISIBLE);
+				tv_message_p2.setText("Du bist Spieler " + DataRepo.playerId +  "\n Wähle ein Quiz aus");
 				break;
 			case "2":
 				DataRepo.playerId = 2;
 				b_startquiz.setVisibility(View.INVISIBLE);
-				tv_message_p2.setVisibility(View.VISIBLE);
-				tv_message_p2.setText("Warte auf Spieler 1");
+				tv_message_p2.setText("Du bist Spieler " + DataRepo.playerId +  "\nWarte auf Spieler 1");
 				break;
 			default:
 				DataRepo.playerId = 0;
 				b_startquiz.setVisibility(View.INVISIBLE);
-				tv_message_p2.setVisibility(View.VISIBLE);
 				tv_message_p2.setText("Es gibt schon 2 Spieler");
 				break;
 		}

@@ -46,8 +46,16 @@ public class ResultActivity extends AppCompatActivity {
 
 	}
 
-	void readLog(String log)
+	void checkOpponent(String hb)
 	{
+		String[] texts = hb.split(";");
+
+
+		//returns isOnline (true/false), opponentName, points (int), questions (int)
+
+
+
+
 
 	}
 }
