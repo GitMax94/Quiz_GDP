@@ -1,10 +1,15 @@
 package com.uni.gdp.quiz_gdp;
 
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class DataRepo
 {
-    static String name;
+	static int playerId;
+	static String name;
     static String uuid;
 	static int currentQuiz;
 	static int currentQuestion;
@@ -19,27 +24,34 @@ class DataRepo
     static void setPlayers(String text)
 	{
 		String[] lines = text.split("<br>");
-		DataRepo.players = new Player[lines.length-1];
+		ArrayList<Player> players_temp = new  ArrayList<Player>();
 
 		int j = 0;
 		for (int i = 0; i < lines.length-1; i++)
 		{
 			String[] line = lines[i].split(";");
-
-			DataRepo.players[i - j] = new Player();
-			DataRepo.players[i - j].name = lines[i].trim();
-
-			/*
-			if (line[0].trim().equals(uuid) && false) {
-				j = 1;
-			}
-			else
+			if (!lines[i].isEmpty() && !lines[i].equals(";") && !isInPlayerList(players_temp, line[0].trim()))
 			{
-				DataRepo.players[i - j] = new Player();
-				DataRepo.players[i - j].uuid = line[0].trim();
-				DataRepo.players[i - j].name = line[1].trim();
-			}*/
+				players_temp.add(new Player(line[1].trim(), line[0].trim()));
+			}
 		}
+		DataRepo.players = new Player[players_temp.size()];
+		for (int i = 0; i < DataRepo.players.length; i++)
+		{
+			DataRepo.players[i] = players_temp.get(i);
+		}
+	}
+
+	static boolean isInPlayerList(ArrayList<Player> players, String uuid)
+	{
+		for (int i = 0; i < players.size(); i++)
+		{
+			if (players.get(i).uuid.equals(uuid))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
     static String[] leaderboardToList()
@@ -101,6 +113,11 @@ class Player
 {
 	String name;
 	String uuid;
+
+	public Player(String name, String uuid) {
+		this.name = name;
+		this.uuid = uuid;
+	}
 }
 
 class Leaderboard

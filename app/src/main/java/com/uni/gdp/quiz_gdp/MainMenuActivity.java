@@ -19,16 +19,20 @@ public class MainMenuActivity extends AppCompatActivity
 	TextView et_name;
 	Button b_startquiz;
 	Button b_leaderboard;
-
+	TextView tv_message_p2;
     @Override
     protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
 
+		et_name = (TextView)findViewById(R.id.et_name_old);
+		b_startquiz = (Button) findViewById(R.id.b_startquiz);
+		b_leaderboard = (Button) findViewById(R.id.b_leaderboard);
+		tv_message_p2 = (TextView)findViewById(R.id.tv_message_p2);
+
 		DataRepo.name = "";
 		DataRepo.uuid = "";
-
 
 		DataRepo.localData = getSharedPreferences("data_local", Activity.MODE_PRIVATE);
 		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
@@ -40,15 +44,12 @@ public class MainMenuActivity extends AppCompatActivity
 			finish();
 		}
 
-		PHPService.sendToServer("?anwendung=F", "setQuizzes", this, null, null);
 
+		PHPService.sendToServer("?func=get_quizzes", "setQuizzes", this, null, null, null);
+		PHPService.sendToServer("?func=add_user?userId=" + DataRepo.uuid + "?name=" + DataRepo.name, "addUser", this, null, null, null);
 		PHPService.heartbeat.run();
 
 
-
-		et_name = (TextView)findViewById(R.id.et_name_old);
-		b_startquiz = (Button) findViewById(R.id.b_startquiz);
-		b_leaderboard = (Button) findViewById(R.id.b_leaderboard);
 
 		//PHPService.sendToServer("", "test", this, null);
 
@@ -113,6 +114,29 @@ public class MainMenuActivity extends AppCompatActivity
 				Toast.makeText(getBaseContext(), "Loaded Quiz", Toast.LENGTH_LONG).show();
 			}
 		});
+	}
+
+	void addUser(String s)
+	{
+		switch (s)
+		{
+			case "1":
+				DataRepo.playerId = 1;
+				tv_message_p2.setVisibility(View.INVISIBLE);
+				break;
+			case "2":
+				DataRepo.playerId = 2;
+				b_startquiz.setVisibility(View.INVISIBLE);
+				tv_message_p2.setVisibility(View.VISIBLE);
+				tv_message_p2.setText("Warte auf Spieler 1");
+				break;
+			default:
+				DataRepo.playerId = 0;
+				b_startquiz.setVisibility(View.INVISIBLE);
+				tv_message_p2.setVisibility(View.VISIBLE);
+				tv_message_p2.setText("Es gibt schon 2 Spieler");
+				break;
+		}
 	}
 
 }

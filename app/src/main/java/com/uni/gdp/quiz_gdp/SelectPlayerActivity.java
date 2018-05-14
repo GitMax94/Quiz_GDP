@@ -18,15 +18,12 @@ public class SelectPlayerActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_player);
-		Log.i("PLAYERS", "1");
-		PHPService.sendToServer("?anwendung=S", "setPlayerNames", null, null, this);
-		Log.i("PLAYERS", "2");
+		PHPService.sendToServer("?anwendung=PO", "setPlayerNames", null, null, this, null);
 	}
 
 	void setList(final String[] displayList)
 	{
 		final SelectPlayerActivity spa = this;
-		Log.i("PLAYERS", "6");
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run()
@@ -40,7 +37,7 @@ public class SelectPlayerActivity extends AppCompatActivity {
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 					{
 						//Send invite here, I think
-						//PHPService.sendToServer("?anwendung=F", "setQuizzes", this, null);
+						PHPService.sendToServer("?anwendung=Log?text=bla;bla;bla", "", null, null, null, null);
 					}
 				});
 				Toast.makeText(getBaseContext(), "Loaded Players", Toast.LENGTH_LONG).show();
@@ -51,18 +48,13 @@ public class SelectPlayerActivity extends AppCompatActivity {
 
 	void setPlayerNames(String input)
 	{
-		Log.i("PLAYERS", "3");
 		DataRepo.setPlayers(input);
-		Log.i("PLAYERS", "4");
 		String[] r = new String[DataRepo.players.length];
 		for (int i = 0; i < DataRepo.players.length; i++)
 		{
 			r[i] = DataRepo.players[i].name;
 		}
-		Log.i("PLAYERS", "5");
 		setList(r);
 	}
-
-
 
 }

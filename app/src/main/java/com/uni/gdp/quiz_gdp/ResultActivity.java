@@ -45,4 +45,9 @@ public class ResultActivity extends AppCompatActivity {
 		//startActivity(new Intent(ResultActivity.this, MainMenuActivity.class));
 
 	}
+
+	void readLog(String log)
+	{
+
+	}
 }
