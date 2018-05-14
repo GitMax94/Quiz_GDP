@@ -1,8 +1,9 @@
 <?php
-$Nutzer_ID = $_GET['Nutzer_ID'];
+$userId = $_GET['userId'];
 $Name = $_GET['Name'];
 $func = $_GET['func'];
 
+$questionId =  $_GET['questionId'];
 $userName = $_GET['userName'];
 $answerId = $_GET['answerId'];
 $isCorrect = $_GET['isCorrect'];
@@ -19,7 +20,7 @@ if(isset($func)){
 
   if ($func=="answer")
   {
-    answer($UserName,$answerId,$isCorrect,totalPoints);
+    answer($userName,$answerId,$isCorrect,$totalPoints);
   }
 
 
@@ -34,7 +35,7 @@ function add_user($userId,$questionId,$answerId,$isCorrect,$totalPoints)
 }
 
 function answer($userName,$answerId,$isCorrect,$totalPoints){
-  if($UserName=="Spieler1"){
+  if($userName=="Spieler1"){
   $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
   $save = fopen("Spieler1.csv", "a");
   fwrite($save, $saveRow);
@@ -42,10 +43,10 @@ function answer($userName,$answerId,$isCorrect,$totalPoints){
 
   else{
     $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
-    $save = fopen(Spiler2.csv, "a");
+    $save = fopen("Spieler2.csv", "a");
     fwrite($save, $saveRow);
     fclose($save);}
-  }
+
 }
 
  ?>
