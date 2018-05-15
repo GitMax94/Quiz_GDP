@@ -9,9 +9,6 @@ $answerId = $_GET['answerId'];
 $isCorrect = $_GET['isCorrect'];
 $totalPoints = $_GET['totalPoints'];
 
-
-
-
 // test.php
 
 $spieler1 = $_GET['Spieler1'];
@@ -31,16 +28,13 @@ if(isset($func)){
 
   if ($func=="add_user")
   {
-	add_user($userId,$name);
+	add_user($userId,$name,$quizID);
   }
 
   if ($func=="answer")
   {
     answer($userName,$answerId,$isCorrect,$totalPoints);
   }
-
-
-
 }
 
 
@@ -84,7 +78,8 @@ if(isset($spieler1)){
 
 
 
-function add_user($userId,$name)
+
+function add_user($userId,$name,$quizID)
 {
 
     // noch nicht fertig
@@ -103,14 +98,14 @@ function add_user($userId,$name)
   	// return $array;
 
     $i=0; $count=0;
-    while(i<$zeile){
+    while($i<$zeile){
       $zeitstempel = time();
     $Differenz = $zeitstempel - $array[$i][2]; $i++;
     if($Differenz < 10){$count++;  } 	}
 
  if($count==0){
    $userName="Spieler1";
-   $saveRow =$UserId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
+   $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
    $save = fopen("SpielerListe.csv", "a");
    fwrite($save, $saveRow);
    fclose($save);
@@ -119,7 +114,7 @@ function add_user($userId,$name)
 
  if($count==1){
    $userName="Spieler2";
-   $saveRow =$UserId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
+   $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
    $save = fopen("SpielerListe.csv", "a");
    fwrite($save, $saveRow);
    fclose($save);
@@ -132,22 +127,13 @@ function add_user($userId,$name)
    echo "Spieler2".';'.$quizId;
  }
  if($count==2){
-
    echo "error";}
-// }
-
-
-
-    																													//Wenn einzelne Werte abgefragt werden sollen
-
-
-
 }
 
 else{
 $zeitstempel = time();
 $userName="Spieler1";
-$saveRow =$UserId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
+$saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
 $save = fopen("SpielerListe.csv", "a");
 fwrite($save, $saveRow);
 fclose($save);
