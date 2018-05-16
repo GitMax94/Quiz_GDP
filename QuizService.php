@@ -8,7 +8,7 @@ $userName = $_GET['userName'];
 $answerId = $_GET['answerId'];
 $isCorrect = $_GET['isCorrect'];
 $totalPoints = $_GET['totalPoints'];
-
+$userName =  $_GET['userName'];
 // test.php
 
 $quizID = $_GET['quizID'];
@@ -37,32 +37,35 @@ if(isset($func)){
     ende($userId, $userName);
   }
   if($func=="heartbeat"){
-	heartbeat($userId); 
+	heartbeat($userId,$name,$userName); 
   }
   if($func=="choose_quiz"){
 	choose_quiz($quizID); 
   }
   
-  if($func== "question"){
+  if($func== "get_quizzes"){
 	$array = FragenEinlesen();
 	FragenSenden($array);
 }
 }
 
-function ende($userId, $userName){
+/*function ende($userId, $userName){
 	unlink("SpielerListe.csv");
-}
+} */
 
-function add_user($userId,$name)
-{
+function add_user($userId,$name){
+	if(file_exists("Spieler1.csv")){
 		unlink("Spieler1.csv");
-	unlink("Spieler2.csv");
-  $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
+	}
+	if(file_exists("Spieler2.csv")){
+		unlink("Spieler2.csv");
+	}
+  $saveRow ="";
   $save = fopen("Spieler1.csv", "a");
   fwrite($save, $saveRow);
   fclose($save);
 
-    $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
+    $saveRow ="";
     $save = fopen("Spieler2.csv", "a");
     fwrite($save, $saveRow);
     fclose($save);
@@ -79,15 +82,22 @@ function add_user($userId,$name)
   			$zeile++;
   			}
 
-    $i=0; $count=0;
+    $i=0; $count=0; $count2=0;
     while($i<$zeile){
       $zeitstempel = time();
     $Differenz = $zeitstempel - $array[$i][2]; $i++;
     if($Differenz < 10){
-		$count++;  
+		$count2++;
+		if( $array[$i][3]=="Spieler1")
+		{
+		$count=1;  
+		} 	
+		if( $array[$i][3]=="Spieler2"&&$count2>=2)
+		{
+		$count=2;  
 		} 	
 		}
-
+	}
  if($count==0){
    $userName="Spieler1";
    $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
@@ -159,8 +169,10 @@ function choose_quiz($quizID){
 	return $quizCsv;
 }
 
-function heartbeat($userId){
+function heartbeat($userId,$name,$userName){
+	$zeitstempel = time();
 	$saveRow = $userId."\r\n";
+	 $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
 	$save = fopen("SpielerListe.csv", "a");
 	fwrite($save, $saveRow);
 	fclose($save);
