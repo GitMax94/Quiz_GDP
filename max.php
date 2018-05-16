@@ -15,7 +15,6 @@ $spieler1 = $_GET['Spieler1'];
 $spieler2 = $_GET['Spieler2'];
 
 $quizID = $_GET['quizID'];
-$userID = $_GET['userID'];
 
 $pointsSpieler1 = $_GET['$pointsSpieler1'];
 $pointsSpieler2 = $_GET['$pointsSpieler2'];
@@ -28,7 +27,9 @@ if(isset($func)){
 
   if ($func=="add_user")
   {
-	add_user($userId,$name,$quizID);
+	choose_quiz($quizID);
+	$quizID2 = $quizID;
+	add_user($userId,$name,$quizID2);
   }
 
   if ($func=="answer")
@@ -50,7 +51,7 @@ if(isset($spieler1)){
 		unlink($delete);
 	}
 	$spieler1CSV = fopen("spieler1.csv", "a");
-	$write = $userID.";".$pointsSpieler1.";".$question.";".$spieler1;
+	$write = $userId.";".$pointsSpieler1.";".$question.";".$spieler1;
 	fwrite($spieler1CSV, $write);
 	fclose($spieler1CSV);
 }
@@ -61,7 +62,7 @@ if(isset($spieler2)){
 		unlink($delete);
 	}
 	$spieler2CSV = fopen("spieler2.csv", "a");
-	$write = $userID.";".$pointsSpieler2.";".$question.";".$spieler2;
+	$write = $userId.";".$pointsSpieler2.";".$question.";".$spieler2;
 	fwrite($spieler2CSV, $write);
 	fclose($spieler2CSV);
 }
@@ -79,7 +80,7 @@ if(isset($spieler1)){
 
 
 
-function add_user($userId,$name,$quizID)
+function add_user($userId,$name,$quizID2)
 {
 
     // noch nicht fertig
@@ -123,8 +124,8 @@ function add_user($userId,$name,$quizID)
      $array1[$zeile] = $csvLesen; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
      $zeile++;
      }
-     $quizID=$array1[$zeile-1];
-   echo "Spieler2".';'.$quizId;
+     //$quizID=$array1[$zeile-1];
+   echo "Spieler2".';'.$quizID2;
  }
  if($count==2){
    echo "error";}
@@ -166,6 +167,7 @@ function choose_quiz($quizID){
 		fwrite($quizCsv, $quizID);
 		fclose($quizCsv);
 	}
+	return $quizCsv;
 }
 
 function heartbeat($spieler1, $spieler2){
