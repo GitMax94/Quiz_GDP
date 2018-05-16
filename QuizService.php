@@ -43,7 +43,7 @@ if(isset($func)){
 	choose_quiz($quizID); 
   }
   
-  if($func== "question"){
+  if($func== "get_quizzes"){
 	$array = FragenEinlesen();
 	FragenSenden($array);
 }
