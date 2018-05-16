@@ -42,6 +42,11 @@ if(isset($func)){
   if($func=="choose_quiz"){
 	choose_quiz($quizID); 
   }
+  
+  if($func== "question"){
+	$array = FragenEinlesen();
+	FragenSenden($array);
+}
 }
 
 function ende($userId, $userName){
@@ -208,6 +213,36 @@ function heartbeat($userId){
 		echo 'false';
 	}
 }
-
+function FragenSenden($array){
+	if(file_exists("Fragen.csv")){
+		$zeile = 0;
+		$array = array();
+		$lesen = fopen("Fragen.csv", "r");
+		while(($csvLesen = fgetcsv($lesen, 1000, ";")) !== FALSE){
+			$LaengeArray = count($csvLesen);
+			$i=0;
+			while($i<$LaengeArray){
+				if($LaengeArray-1 == $i){
+					echo $csvLesen[$i].'<br>'; $i++;
+				 }else{
+					echo $csvLesen[$i].';'; $i++;
+				}
+			}
+		}
+	}
+	echo $text;
+}
+function FragenEinlesen(){
+	if(file_exists("Fragen.csv")){
+		$zeile = 0;
+		$array = array();
+		$lesen = fopen("Fragen.csv", "r");
+		while(($csvLesen = fgetcsv($lesen, 1000, ";")) !== FALSE){
+			$array[$zeile] = $csvLesen;
+			$zeile++;
+		}
+	return $array;
+	}
+}
 
  ?>
