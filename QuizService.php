@@ -87,7 +87,11 @@ function add_user($userId,$name){
       $zeitstempel = time();
     $Differenz = $zeitstempel - $array[$i][2]; $i++;
     if($Differenz < 10){
-		$count++;  
+		if( $array[$i][3]=="Spieler1")
+		$count=1;  
+		} 	
+		if( $array[$i][3]=="Spieler2")
+		$count=2;  
 		} 	
 		}
 
