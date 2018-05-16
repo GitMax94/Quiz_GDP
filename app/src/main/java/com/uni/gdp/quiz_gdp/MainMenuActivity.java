@@ -47,9 +47,10 @@ public class MainMenuActivity extends AppCompatActivity
 
 		PHPService.sendToServer("?func=get_quizzes", "setQuizzes", this, null, null, null);
 		PHPService.sendToServer("?func=add_user?userId=" + DataRepo.uuid + "?name=" + DataRepo.name, "addUser", this, null, null, null);
+		//PHPService.sendToServer("?func=add_user&userId=1243&name=Max", "addUser", this, null, null, null);
 		PHPService.heartbeat.run();
 
-
+		//http://cbrell.de/bwi50207/181/op995204/QuizService.php?func=add_user&userId=1243&name=Max
 
 		//PHPService.sendToServer("", "test", this, null);
 
@@ -57,8 +58,8 @@ public class MainMenuActivity extends AppCompatActivity
 		et_name.setText(DataRepo.name);
 
 		//TODO Load properly, see DataRepo.java for classes
-		DataRepo.quizzes = TestService.MakeTestQuizzes(20);
-		DataRepo.leaderboard = TestService.MakeTestLeaderboard(10);
+		//DataRepo.quizzes = TestService.MakeTestQuizzes(20);
+		//DataRepo.leaderboard = TestService.MakeTestLeaderboard(10);
 
 		b_startquiz.setOnClickListener( new View.OnClickListener()
 		{
@@ -82,7 +83,7 @@ public class MainMenuActivity extends AppCompatActivity
 
 
 
-	void setQuizzes(final String s)
+	void setQuizzes(String s)
 	{
 		String[] lines = s.split("<br>");
 		DataRepo.quizzes = new Quiz[lines.length-1];
@@ -118,13 +119,13 @@ public class MainMenuActivity extends AppCompatActivity
 
 	void addUser(String s)
 	{
-		switch (s)
+		switch (s.split(";")[0])
 		{
-			case "1":
+			case "Spieler1":
 				DataRepo.playerId = 1;
-				tv_message_p2.setText("Du bist Spieler " + DataRepo.playerId +  "\n Wähle ein Quiz aus");
+				tv_message_p2.setText("Du bist Spieler " + DataRepo.playerId + " Wähle ein Quiz aus");
 				break;
-			case "2":
+			case "Spieler2":
 				DataRepo.playerId = 2;
 				b_startquiz.setVisibility(View.INVISIBLE);
 				tv_message_p2.setText("Du bist Spieler " + DataRepo.playerId +  "\nWarte auf Spieler 1");
@@ -132,7 +133,7 @@ public class MainMenuActivity extends AppCompatActivity
 			default:
 				DataRepo.playerId = 0;
 				b_startquiz.setVisibility(View.INVISIBLE);
-				tv_message_p2.setText("Es gibt schon 2 Spieler");
+				tv_message_p2.setText("Es gibt schon 2 Spieler -" + s + "-");
 				break;
 		}
 	}

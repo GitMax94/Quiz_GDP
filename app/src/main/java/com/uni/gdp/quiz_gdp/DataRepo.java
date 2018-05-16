@@ -11,9 +11,12 @@ class DataRepo
 	static int playerId;
 	static String name;
     static String uuid;
+    static String opponentName;
 	static int currentQuiz;
 	static int currentQuestion;
     static int currentPoints;
+	static int opponentQuestion;
+	static int opponentPoints;
 	static SharedPreferences localData;
 
 	static Quiz[] quizzes;

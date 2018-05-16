@@ -22,7 +22,7 @@ public class PHPService
 		@Override
 		public void run()
 		{
-			sendToServer("?func=heartbeat&userId=" + DataRepo.uuid, "checkOpponent", null, null, null, resultAct);
+			sendToServer("?func=heartbeat&userId=" + DataRepo.uuid + "&name=" + DataRepo.name + "&userName=" + DataRepo.playerId, "checkOpponent", null, null, null, resultAct);
 			Log.i("PHP", "heartbeat now");
 			hbHandler.postDelayed(heartbeat, 10000);
 		}
@@ -37,7 +37,7 @@ public class PHPService
 			public void run()
 			{
 				try {
-					String webURL = "http://cbrell.de/bwi50205/172/op995204/QuizAuswertung.php" + phpParams;
+					String webURL = "http://cbrell.de/bwi50207/181/op995204/QuizService.php" + phpParams;
 					String TextParameter = URLEncoder.encode(webURL, "UTF-8");
 					URL scriptURL = new URL(webURL);
 					HttpURLConnection HttpURLVerbindung = (HttpURLConnection) scriptURL.openConnection();

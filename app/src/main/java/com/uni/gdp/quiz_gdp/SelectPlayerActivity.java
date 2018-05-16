@@ -18,7 +18,7 @@ public class SelectPlayerActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_player);
-		PHPService.sendToServer("?anwendung=PO", "setPlayerNames", null, null, this, null);
+		//PHPService.sendToServer("?anwendung=PO", "setPlayerNames", null, null, null, null);
 	}
 
 	void setList(final String[] displayList)

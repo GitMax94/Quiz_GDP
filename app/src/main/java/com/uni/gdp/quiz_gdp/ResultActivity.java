@@ -50,7 +50,10 @@ public class ResultActivity extends AppCompatActivity {
 	{
 		String[] texts = hb.split(";");
 
-
+		//texts[0]
+		DataRepo.opponentName = texts[1];
+		DataRepo.opponentPoints = Integer.parseInt(texts[2]);
+		DataRepo.opponentQuestion = Integer.parseInt(texts[3]);
 		//returns isOnline (true/false), opponentName, points (int), questions (int)
 
 
