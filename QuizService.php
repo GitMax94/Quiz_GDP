@@ -8,7 +8,7 @@ $userName = $_GET['userName'];
 $answerId = $_GET['answerId'];
 $isCorrect = $_GET['isCorrect'];
 $totalPoints = $_GET['totalPoints'];
-
+$userName =  $_GET['userName'];
 // test.php
 
 $quizID = $_GET['quizID'];
@@ -37,7 +37,7 @@ if(isset($func)){
     ende($userId, $userName);
   }
   if($func=="heartbeat"){
-	heartbeat($userId); 
+	heartbeat($userId,$name,$userName); 
   }
   if($func=="choose_quiz"){
 	choose_quiz($quizID); 
@@ -49,9 +49,9 @@ if(isset($func)){
 }
 }
 
-function ende($userId, $userName){
+/*function ende($userId, $userName){
 	unlink("SpielerListe.csv");
-}
+} */
 
 function add_user($userId,$name){
 	if(file_exists("Spieler1.csv")){
@@ -162,8 +162,10 @@ function choose_quiz($quizID){
 	return $quizCsv;
 }
 
-function heartbeat($userId){
+function heartbeat($userId,$name,$userName){
+	$zeitstempel = time();
 	$saveRow = $userId."\r\n";
+	 $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
 	$save = fopen("SpielerListe.csv", "a");
 	fwrite($save, $saveRow);
 	fclose($save);
