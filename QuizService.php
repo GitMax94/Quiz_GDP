@@ -57,12 +57,12 @@ function add_user($userId,$name)
 {
 		unlink("Spieler1.csv");
 	unlink("Spieler2.csv");
-  $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
+  $saveRow ="";
   $save = fopen("Spieler1.csv", "a");
   fwrite($save, $saveRow);
   fclose($save);
 
-    $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
+    $saveRow ="";
     $save = fopen("Spieler2.csv", "a");
     fwrite($save, $saveRow);
     fclose($save);
