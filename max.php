@@ -11,9 +11,6 @@ $totalPoints = $_GET['totalPoints'];
 
 // test.php
 
-$spieler1 = $_GET['Spieler1'];
-$spieler2 = $_GET['Spieler2'];
-
 $quizID = $_GET['quizID'];
 
 $pointsSpieler1 = $_GET['$pointsSpieler1'];
@@ -35,14 +32,25 @@ if(isset($func)){
   {
     answer($userName,$answerId,$isCorrect,$totalPoints);
   }
+  if ($func=="ende")
+  {
+    ende($userId, $userName);
+  }
+  if($func=="heartbeat"){
+	heartbeat($userId); 
+  }
+  if($func=="choose_quiz"){
+	choose_quiz($quizID); 
+  }
 }
 
-
+function ende($userId, $userName){
+	unlink("Spieler1.csv");
+	unlink("Spieler2.csv");
+	unlink("SpielerListe.csv");
+}
 
 //Test.php
-if(isset($spieler1)){
-	choose_quiz($quizID);
-}
 
 if(isset($spieler1)){
 	if(file_exists("spieler1.csv")){
@@ -66,26 +74,8 @@ if(isset($spieler2)){
 	fclose($spieler2CSV);
 }
 
-
-if(isset($spieler1)){
-	heartbeat($spieler1, $spieler2);
-}elseif($spieler2){
-	heartbeat($spieler1, $spieler2);
-}
-
-
-
-
-
-
-
 function add_user($userId,$name)
 {
-
-    // noch nicht fertig
-
-    //einlesen welche zeilen aktuell sind und Spiele Nummern
-
     if(file_exists("SpielerListe.csv")){// prueft ob datei da ist
 
   		$zeile = 0;
@@ -95,13 +85,15 @@ function add_user($userId,$name)
   			$array[$zeile] = $csvLesen; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
   			$zeile++;
   			}
-  	// return $array;
 
     $i=0; $count=0;
     while($i<$zeile){
       $zeitstempel = time();
     $Differenz = $zeitstempel - $array[$i][2]; $i++;
-    if($Differenz < 10){$count++;  } 	}
+    if($Differenz < 10){
+		$count++;  
+		} 	
+		}
 
  if($count==0){
    $userName="Spieler1";
@@ -174,7 +166,19 @@ function choose_quiz($quizID){
 	return $quizCsv;
 }
 
-function heartbeat($spieler1, $spieler2){
+function heartbeat($userId){
+	
+
+	$saveRow = $userId."\r\n";
+	$save = fopen("SpielerListe.csv", "a");
+	fwrite($save, $saveRow);
+	fclose($save);
+	
+	
+	
+	
+
+	/*
 	if($spieler1){
 		if(file_exists("spieler2.csv")){
 			$isOnline = "true";
@@ -210,6 +214,7 @@ function heartbeat($spieler1, $spieler2){
 			unlink($delete);
 		}
 	}
+	*/
 }
 
 
