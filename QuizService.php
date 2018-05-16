@@ -82,15 +82,16 @@ function add_user($userId,$name){
   			$zeile++;
   			}
 
-    $i=0; $count=0;
+    $i=0; $count=0; $count2=0;
     while($i<$zeile){
       $zeitstempel = time();
     $Differenz = $zeitstempel - $array[$i][2]; $i++;
     if($Differenz < 10){
+		$count2++;
 		if( $array[$i][3]=="Spieler1")
 		$count=1;  
 		} 	
-		if( $array[$i][3]=="Spieler2")
+		if( $array[$i][3]=="Spieler2"&&$count2>=2)
 		$count=2;  
 		} 	
 		}
