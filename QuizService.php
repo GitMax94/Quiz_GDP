@@ -89,9 +89,11 @@ function add_user($userId,$name){
     if($Differenz < 10){
 		$count2++;
 		if( $array[$i][3]=="Spieler1")
+		{
 		$count=1;  
 		} 	
 		if( $array[$i][3]=="Spieler2"&&$count2>=2)
+		{
 		$count=2;  
 		} 	
 		}
