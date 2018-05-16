@@ -97,7 +97,7 @@ function add_user($userId,$name){
 		$count=2;  
 		} 	
 		}
-
+	}
  if($count==0){
    $userName="Spieler1";
    $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
