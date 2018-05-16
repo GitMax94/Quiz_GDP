@@ -45,37 +45,25 @@ if(isset($func)){
 }
 
 function ende($userId, $userName){
-	unlink("Spieler1.csv");
-	unlink("Spieler2.csv");
 	unlink("SpielerListe.csv");
-}
-
-//Test.php
-
-if(isset($spieler1)){
-	if(file_exists("spieler1.csv")){
-		$delete = "spieler1.csv";
-		unlink($delete);
-	}
-	$spieler1CSV = fopen("spieler1.csv", "a");
-	$write = $userId.";".$pointsSpieler1.";".$question.";".$spieler1;
-	fwrite($spieler1CSV, $write);
-	fclose($spieler1CSV);
-}
-
-if(isset($spieler2)){
-	if(file_exists("spieler2.csv")){
-		$delete = "spieler2.csv";
-		unlink($delete);
-	}
-	$spieler2CSV = fopen("spieler2.csv", "a");
-	$write = $userId.";".$pointsSpieler2.";".$question.";".$spieler2;
-	fwrite($spieler2CSV, $write);
-	fclose($spieler2CSV);
 }
 
 function add_user($userId,$name)
 {
+		unlink("Spieler1.csv");
+	unlink("Spieler2.csv");
+  $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
+  $save = fopen("Spieler1.csv", "a");
+  fwrite($save, $saveRow);
+  fclose($save);
+
+    $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
+    $save = fopen("Spieler2.csv", "a");
+    fwrite($save, $saveRow);
+    fclose($save);
+	
+	
+	
     if(file_exists("SpielerListe.csv")){// prueft ob datei da ist
 
   		$zeile = 0;
@@ -144,12 +132,12 @@ function answer($userName,$answerId,$isCorrect,$totalPoints){
   fwrite($save, $saveRow);
   fclose($save);}
 
-  else{
+  elseif($userName=="Spieler2"){
     $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
     $save = fopen("Spieler2.csv", "a");
     fwrite($save, $saveRow);
-    fclose($save);}
-
+    fclose($save);
+	}
 }
 //Test.php
 
