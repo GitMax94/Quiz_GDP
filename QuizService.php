@@ -54,10 +54,10 @@ function ende($userId, $userName){
 }
 
 function add_user($userId,$name){
-	if(isset("Spieler1.csv"){
+	if(isset("Spieler1.csv")){
 		unlink("Spieler1.csv");
 	}
-	if(isset("Spieler2.csv"){
+	if(isset("Spieler2.csv")){
 		unlink("Spieler2.csv");
 	}
   $saveRow ="";
