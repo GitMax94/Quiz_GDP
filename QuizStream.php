@@ -62,7 +62,15 @@ if(file_exists("quizID.csv")){// prueft ob datei da ist
    }
  $quizID=$array1[$zeile-1][0];
 
-echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
+$zeile3 = 0;
+$array3 = array();
+$lesen3 = fopen("Fragen.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
+while(($csvLesen3 = fgetcsv($lesen3, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
+$array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
+$zeile3++;
+}
+ 
+echo "<h1>Es wurde Folgendes Quiz ausgewählt: ".$array3[$quizID-1][0]."<h1>";}
 
  $zeile2 = 0;
  $array2 = array();
@@ -93,13 +101,6 @@ $array5[$zeile5] = $csvLesen5; 																										//Doppel Array, [Zeile]
 $zeile5++;
 }
 
-$zeile3 = 0;
-$array3 = array();
-$lesen3 = fopen("Fragen.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
-while(($csvLesen3 = fgetcsv($lesen3, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
-$array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
-$zeile3++;
-}
 $i=1;
 $z=0;
 echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
