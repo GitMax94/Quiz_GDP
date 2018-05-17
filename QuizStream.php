@@ -50,7 +50,6 @@
 
 <head> <title>Watch</title>
 
-  <p align="center">Punkte Spieler 1  Punkte Spieler 2</p>
 <?php
 
 if(file_exists("quizID.csv")){// prueft ob datei da ist
@@ -128,13 +127,9 @@ $z++;
 
 echo "</table>";
 echo "</div>";
-  
 
-  
-  
-  
-  
-  
+echo  "<p align=center>".$array2[$zeile2-2][1]." vs ".$array2[$zeile2-1][1]."</p>"; 
+echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
 ?>
 <br> </br>
 </head>
