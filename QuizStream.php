@@ -102,12 +102,19 @@ $array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile]
 $zeile3++;
 }
 $i=1;
+$z=0;
 echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
 while($i<=18){
 $richtig = $array3[$quizID-1][$i+1];
 $rAntwort = $richtig+1+$i;
-echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
-$i= $i+6;}
+
+$s1Antwort = $array4[$z][0]+1+$i;
+$s2Antwort = $array5[$z][0]+1+$i;
+
+echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th>".$array3[$quizID-1][$s1Antwort]."</th> <th>".$array3[$quizID-1][$s2Antwort]."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
+$i= $i+6;
+$z++;
+}
 
 echo "</table>";
 echo "</div>";
