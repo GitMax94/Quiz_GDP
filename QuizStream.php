@@ -72,7 +72,7 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
    $array1[$zeile] = $csvLesen; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
    $zeile++;
    }
-  echo"  <div class=spieler><h1>Quiz Spiel Stream ".$array1[0][1]." vs".$array1[1][0]."<h1></div>";
+  echo"  <div class=spieler><h1>Quiz Spiel Stream ".$array1[0][1]." vs ".$array1[1][0]."<h1></div>";
 
 ?>
 <br> </br>
