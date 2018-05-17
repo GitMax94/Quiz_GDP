@@ -72,21 +72,33 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
    $array2[$zeile2] = $csvLesen2; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
    $zeile2++;
    }
-  echo"  <div class=spieler><h1>Quiz Spiel Stream ".$array2[$zeile2-2][1]." vs ".$array2[$zeile2-1][1]."<h1></div>";
+echo"  <div class=spieler><h1>Quiz Spiel Stream ".$array2[$zeile2-2][1]." vs ".$array2[$zeile2-1][1]."<h1></div>";
 
+echo "<div class=tabellehintergrund>";
+echo "<table border=1 width= 100% align=center>";
+
+$zeile3 = 0;
+$array3 = array();
+$lesen3 = fopen("Fragen.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
+while(($csvLesen3 = fgetcsv($lesen3, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
+$array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
+$zeile3++;
+}
+$i=1;
+echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
+while($i<=18){
+echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
+$i= $i+6;}
+
+
+//echo "<tr class=normal> <td>Wie geht es dir ?</td> <td class=falsch>gut</td> <td class=richtig>schlecht</td> <td>schlecht</td>  </tr>";
+//echo "<tr class=normal> <td>Frage</td> <td>AntwortSpieler1</td> <td>AntwortSpieler2</td> <td>Richtige Antwort</td> </tr>";
+//echo "<tr class=normal> <td>Frage</td> <td>AntwortSpieler1</td> <td>AntwortSpieler2</td> <td>Richtige Antwort</td> </tr>";
+echo "</table>";
+
+echo "</div>";
   
-  
-  $zeile3 = 0;
- $array3 = array();
- $lesen3 = fopen("Fragen.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
- while(($csvLesen3 = fgetcsv($lesen3, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
-   $array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
-   $zeile3++;
-   }
-   $i=1;
-   while($i<=19){
-	   
-   echo $array3[$quizID-1][$i]; $i= $i+6;}
+
   
 ?>
 <br> </br>
@@ -99,19 +111,6 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
 <col width="21%">
 <col width="21%">
 </colgroup>
-
-<?php
-
-?>
-<div class="tabellehintergrund">
-<table border=1 width= "100%" align="center">
- <tr class="normal"> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>
-<tr class="normal"> <td>Wie geht es dir ?</td> <td class="falsch">gut</td> <td class="richtig">schlecht</td> <td>schlecht</td>  </tr>
-<tr class="normal"> <td>Frage</td> <td>AntwortSpieler1</td> <td>AntwortSpieler2</td> <td>Richtige Antwort</td> </tr>
-<tr class="normal"> <td>Frage</td> <td>AntwortSpieler1</td> <td>AntwortSpieler2</td> <td>Richtige Antwort</td> </tr>
-</table>
-
-</div>
 
 <img src="F.png"> <img src="F.png" align="center">
 </body>
