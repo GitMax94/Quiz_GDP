@@ -30,7 +30,7 @@ public class SelectquizActivity extends AppCompatActivity {
 				DataRepo.currentQuiz = position;
 				DataRepo.currentQuestion = 0;
 				DataRepo.currentPoints = 0;
-				PHPService.sendToServer("?func=choose_quiz?quizId=" + DataRepo.currentQuiz, "", null, null, null, null);
+				PHPService.sendToServer("?func=choose_quiz&quizId=" + DataRepo.currentQuiz, "", null, null, null, null);
 				startActivity(new Intent(SelectquizActivity.this, QuestionActivity.class));
 			}
 		});

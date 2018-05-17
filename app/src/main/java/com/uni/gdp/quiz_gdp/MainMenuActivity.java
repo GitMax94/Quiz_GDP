@@ -46,7 +46,7 @@ public class MainMenuActivity extends AppCompatActivity
 
 
 		PHPService.sendToServer("?func=get_quizzes", "setQuizzes", this, null, null, null);
-		PHPService.sendToServer("?func=add_user?userId=" + DataRepo.uuid + "?name=" + DataRepo.name, "addUser", this, null, null, null);
+		PHPService.sendToServer("?func=add_user&userId=" + DataRepo.uuid + "&name=" + DataRepo.name, "addUser", this, null, null, null);
 		//PHPService.sendToServer("?func=add_user&userId=1243&name=Max", "addUser", this, null, null, null);
 		PHPService.heartbeat.run();
 
