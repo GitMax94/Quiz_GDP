@@ -110,8 +110,18 @@ $rAntwort = $richtig+1+$i;
 
 $s1Antwort = $array4[$z][0]+1+$i;
 $s2Antwort = $array5[$z][0]+1+$i;
+if($s1Antwort==$rAntwort){
+$s1 = "richtig";	
+}else{
+$s1 = "falsch";	
+}
 
-echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th>".$array3[$quizID-1][$s1Antwort]."</th> <th>".$array3[$quizID-1][$s2Antwort]."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
+if($s2Antwort==$rAntwort){
+$s2 = "richtig";
+}else{
+$s2 = "falsch";	
+}
+echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$array3[$quizID-1][$s1Antwort]."</th> <th class =  ".$s2.">".$array3[$quizID-1][$s2Antwort]."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;
 $z++;
 }
