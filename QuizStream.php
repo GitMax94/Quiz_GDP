@@ -87,7 +87,9 @@ $zeile3++;
 $i=1;
 echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
 while($i<=18){
-echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
+$richtig = $array3[$quizID-1][$i+1];
+$rAntwort = $richtig+1+$i;
+echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;}
 
 
