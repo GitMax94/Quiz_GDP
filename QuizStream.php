@@ -78,7 +78,7 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
   
   $zeile3 = 0;
  $array3 = array();
- $lesen3 = fopen("SpielerListe.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
+ $lesen3 = fopen("Fragen.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
  while(($csvLesen2 = fgetcsv($lesen3, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
    $array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
    $zeile3++;
