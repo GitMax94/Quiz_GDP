@@ -83,7 +83,7 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
    $array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
    $zeile3++;
    }
- echo $array3[$quizID-1][0];
+ echo $array3[$quizID-1][1];
   
 ?>
 <br> </br>
