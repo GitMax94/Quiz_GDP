@@ -52,7 +52,7 @@
 
   <p align="center">Punkte Spieler 1  Punkte Spieler 2</p>
 <?php
-
+ echo test;
 if(file_exists("quizID.csv")){// prueft ob datei da ist
  $zeile = 0;
  $array1 = array();
@@ -62,7 +62,7 @@ if(file_exists("quizID.csv")){// prueft ob datei da ist
    $zeile++;
    }
  $quizID=$array1[$zeile-1][0];
-echo $quizID;}
+echo "<h1>Es wurde Folgendes Quiz ausgewählt:<h1>" $quizID;}
 
 ?>
 <br> </br>
