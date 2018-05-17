@@ -84,9 +84,26 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
    $zeile3++;
    }
    $i=1;
+   echo "<colgroup>
+  <!-- tabelen Weite -->
+<col width="37%">
+<col width="21%">
+<col width="21%">
+<col width="21%">
+</colgroup>
+
+
+<div class="tabellehintergrund">
+<table border=1 width= "100%" align="center">";
+   
    while($i<=19){
-	   
-   echo $array3[$quizID-1][$i]; $i= $i+6;}
+	  echo "<tr class="normal"> <th>".$array3[$quizID-1][$i];."</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";$i+6;
+ // echo $array3[$quizID-1][$i]; $i= $i+6; 
+  }  echo "</table>
+
+</div>";
+   
+ 
   
 ?>
 <br> </br>
@@ -100,9 +117,7 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
 <col width="21%">
 </colgroup>
 
-<?php
 
-?>
 <div class="tabellehintergrund">
 <table border=1 width= "100%" align="center">
  <tr class="normal"> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>
