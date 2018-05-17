@@ -84,13 +84,7 @@ echo "<h1>Es wurde Folgendes Quiz ausgewählt:".$quizID."<h1>";}
    $zeile3++;
    }
    $i=1;
-   echo "<colgroup>
-  <!-- tabelen Weite -->
-<col width="37%">
-<col width="21%">
-<col width="21%">
-<col width="21%">
-</colgroup>
+ 
 
 
 <div class="tabellehintergrund">
