@@ -77,6 +77,23 @@ echo"  <div class=spieler><h1>Quiz Spiel Stream ".$array2[$zeile2-2][1]." vs ".$
 echo "<div class=tabellehintergrund>";
 echo "<table border=1 width= 100% align=center>";
 
+
+$zeile4 = 0;
+$array4 = array();
+$lesen4 = fopen("Spieler1.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
+while(($csvLesen4 = fgetcsv($lesen4, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
+$array4[$zeile4] = $csvLesen4; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
+$zeile4++;
+}
+
+$zeile5 = 0;
+$array5 = array();
+$lesen5 = fopen("Spieler2.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
+while(($csvLesen5 = fgetcsv($lesen5, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
+$array5[$zeile5] = $csvLesen5; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
+$zeile5++;
+}
+
 $zeile3 = 0;
 $array3 = array();
 $lesen3 = fopen("Fragen.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
@@ -92,15 +109,14 @@ $rAntwort = $richtig+1+$i;
 echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;}
 
-
-//echo "<tr class=normal> <td>Wie geht es dir ?</td> <td class=falsch>gut</td> <td class=richtig>schlecht</td> <td>schlecht</td>  </tr>";
-//echo "<tr class=normal> <td>Frage</td> <td>AntwortSpieler1</td> <td>AntwortSpieler2</td> <td>Richtige Antwort</td> </tr>";
-//echo "<tr class=normal> <td>Frage</td> <td>AntwortSpieler1</td> <td>AntwortSpieler2</td> <td>Richtige Antwort</td> </tr>";
 echo "</table>";
-
 echo "</div>";
   
 
+  
+  
+  
+  
   
 ?>
 <br> </br>
