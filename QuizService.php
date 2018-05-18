@@ -55,10 +55,12 @@ if(isset($func)){
 
 function add_user($userName,$userId,$name){
 	if(file_exists("Spieler1.csv")){
-		unlink("Spieler1.csv");
+    if($userName=="Spieler1"){
+		unlink("Spieler1.csv");}
 	}
 	if(file_exists("Spieler2.csv")){
-		unlink("Spieler2.csv");
+    if($userName=="Spieler2"){
+		unlink("Spieler2.csv");}
 	}
   $saveRow ="";
   $save = fopen("Spieler1.csv", "a");
