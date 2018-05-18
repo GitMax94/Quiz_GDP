@@ -19,7 +19,11 @@ public class MainMenuActivity extends AppCompatActivity
 	TextView et_name;
 	Button b_startquiz;
 	Button b_leaderboard;
+	Button b_player;
 	TextView tv_message_p2;
+	String player = "Spieler1";
+	MainMenuActivity mma;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
 	{
@@ -30,6 +34,8 @@ public class MainMenuActivity extends AppCompatActivity
 		b_startquiz = (Button) findViewById(R.id.b_startquiz);
 		b_leaderboard = (Button) findViewById(R.id.b_leaderboard);
 		tv_message_p2 = (TextView)findViewById(R.id.tv_message_p2);
+		b_player = (Button) findViewById(R.id.b_player);
+
 
 		DataRepo.name = "";
 		DataRepo.uuid = "";
@@ -45,8 +51,13 @@ public class MainMenuActivity extends AppCompatActivity
 		}
 
 
+
+
+
+
+
 		PHPService.sendToServer("?func=get_quizzes", "setQuizzes", this, null, null, null);
-		PHPService.sendToServer("?func=add_user&userId=" + DataRepo.uuid + "&name=" + DataRepo.name, "addUser", this, null, null, null);
+		//PHPService.sendToServer("?func=add_user&userName=" + player, "addUser", this, null, null, null);
 		//PHPService.sendToServer("?func=add_user&userId=1243&name=Max", "addUser", this, null, null, null);
 		PHPService.heartbeat.run();
 
@@ -61,24 +72,35 @@ public class MainMenuActivity extends AppCompatActivity
 		//DataRepo.quizzes = TestService.MakeTestQuizzes(20);
 		//DataRepo.leaderboard = TestService.MakeTestLeaderboard(10);
 
+
+		mma = this;
+
 		b_startquiz.setOnClickListener( new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				startActivity(new Intent(MainMenuActivity.this, SelectquizActivity.class));
+				PHPService.sendToServer("?func=add_user&userName=" + player + "&userId=" + DataRepo.uuid + "&name" + DataRepo.name, "addUser", mma, null, null, null);
 			}
 		});
 
-		b_leaderboard.setOnClickListener( new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+
+		b_player.setOnClickListener( new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
 			{
-				//DataRepo.setName(et_name.getText().toString(), DataRepo.uuid);
-				startActivity(new Intent(MainMenuActivity.this, LeaderboardActivity.class));
-            }
-        });
+				if (player.equals("Spieler1"))
+				{
+					player = "Spieler2";
+				}
+				else
+				{
+					player = "Spieler1";
+				}
+				b_player.setText(player);
+			}
+		});
     }
 
 
@@ -119,23 +141,10 @@ public class MainMenuActivity extends AppCompatActivity
 
 	void addUser(String s)
 	{
-		switch (s.split(";")[0])
-		{
-			case "Spieler1":
-				DataRepo.playerId = 1;
-				tv_message_p2.setText("Du bist Spieler " + DataRepo.playerId + " Wähle ein Quiz aus");
-				break;
-			case "Spieler2":
-				DataRepo.playerId = 2;
-				b_startquiz.setVisibility(View.INVISIBLE);
-				tv_message_p2.setText("Du bist Spieler " + DataRepo.playerId +  "\nWarte auf Spieler 1");
-				break;
-			default:
-				DataRepo.playerId = 0;
-				b_startquiz.setVisibility(View.INVISIBLE);
-				tv_message_p2.setText("Es gibt schon 2 Spieler -" + s + "-");
-				break;
-		}
+		DataRepo.currentQuiz = 0;
+		DataRepo.currentQuestion = 0;
+		DataRepo.currentPoints = 0;
+		startActivity(new Intent(MainMenuActivity.this, QuestionActivity.class));
 	}
 
 }
