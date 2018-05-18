@@ -69,7 +69,7 @@ while(($csvLesen3 = fgetcsv($lesen3, 1000, ";")) !== FALSE){ 																			
 $array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
 $zeile3++;
 }
-
+ 
 echo "<h1>Es wurde Folgendes Quiz ausgewählt: ".$array3[$quizID-1][0]."<h1>";}
 
  $zeile2 = 0;
@@ -104,22 +104,22 @@ $zeile5++;
 $i=1;
 $z=0;
 echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
-while($i<=270){
+while($i<=18){
 $richtig = $array3[$quizID-1][$i+1];
 $rAntwort = $richtig+1+$i;
 
 $s1Antwort = $array4[$z][0]+1+$i;
 $s2Antwort = $array5[$z][0]+1+$i;
 if($s1Antwort==$rAntwort){
-$s1 = "richtig";
+$s1 = "richtig";	
 }else{
-$s1 = "falsch";
+$s1 = "falsch";	
 }
 
 if($s2Antwort==$rAntwort){
 $s2 = "richtig";
 }else{
-$s2 = "falsch";
+$s2 = "falsch";	
 }
 echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$array3[$quizID-1][$s1Antwort]."</th> <th class =  ".$s2.">".$array3[$quizID-1][$s2Antwort]."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;
@@ -129,7 +129,7 @@ $z++;
 echo "</table>";
 echo "</div>";
 
-echo  "<p align=center>".$array2[$zeile2-2][1]." vs ".$array2[$zeile2-1][1]."</p>";
+echo  "<p align=center>".$array2[$zeile2-2][1]." vs ".$array2[$zeile2-1][1]."</p>"; 
 echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
 ?>
 <br> </br>
