@@ -37,12 +37,12 @@ if(isset($func)){
     ende($userId, $userName);
   }
   if($func=="heartbeat"){
-	heartbeat($userId,$name,$userName); 
+	heartbeat($userId,$name,$userName);
   }
   if($func=="choose_quiz"){
-	choose_quiz($quizID); 
+	choose_quiz($quizID);
   }
-  
+
   if($func== "get_quizzes"){
 	$array = FragenEinlesen();
 	FragenSenden($array);
@@ -53,7 +53,7 @@ if(isset($func)){
 	unlink("SpielerListe.csv");
 } */
 
-function add_user($userId,$name){
+function add_user($userName,$userId,$name){
 	if(file_exists("Spieler1.csv")){
 		unlink("Spieler1.csv");
 	}
@@ -69,54 +69,32 @@ function add_user($userId,$name){
     $save = fopen("Spieler2.csv", "a");
     fwrite($save, $saveRow);
     fclose($save);
-	
-	
-	
+
+
+
     if(file_exists("SpielerListe.csv")){// prueft ob datei da ist
 
-  		$zeile = 0;
-  		$array = array();
-  		$lesen = fopen("SpielerListe.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
-  		while(($csvLesen = fgetcsv($lesen, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
-  			$array[$zeile] = $csvLesen; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
-  			$zeile++;
-  			}
 
-    $i=0; $count=0; $count2=0;
-    while($i<$zeile){
-      $zeitstempel = time();
-    $Differenz = $zeitstempel - $array[$i][2]; $i++;
-    if($Differenz < 10){
-		$count2++;
-		if( $array[$i][3]=="Spieler1")
-		{
-		$count=1;  
-		} 	
-		if( $array[$i][3]=="Spieler2"&&$count2>=2)
-		{
-		$count=2;  
-		} 	
-		}
-	}
- if($count==0){
+
+ if($userName=="Spieler1"){
    $userName="Spieler1";
    $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
    $save = fopen("SpielerListe.csv", "a");
    fwrite($save, $saveRow);
    fclose($save);
-   echo "Spieler1".';'."null";
+   echo "Spieler1";
  }
 
- if($count==1){
+ if($userName=="Spieler2"){
    $userName="Spieler2";
    $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
    $save = fopen("SpielerListe.csv", "a");
    fwrite($save, $saveRow);
    fclose($save);
 
-   
+
    if(file_exists("quizID.csv")){// prueft ob datei da ist
-		$zeile = 0; 
+		$zeile = 0;
 		$array1 = array();
 		$lesen = fopen("quizID.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
 		while(($csvLesen = fgetcsv($lesen, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
@@ -190,8 +168,8 @@ function heartbeat($userId,$name,$userName){
 		$zeitstempel = time();
 		$Differenz = $zeitstempel - $array[$i][2]; $i++;
 		if($Differenz < 10){
-			$count++;  
-		} 	
+			$count++;
+		}
 	}
 
 	if($count==2){
@@ -219,7 +197,7 @@ function heartbeat($userId,$name,$userName){
 		$points=$array2[$zeile2-1][2];
 		$questions=$zeile2-1;
 		}
-		echo 'true'.';'.$opponentName.';'.$points.';'.question;
+		echo 'true'.';'.$opponentName.';'.$points.';'.$questions;
 	}
 	else{
 		echo 'false';

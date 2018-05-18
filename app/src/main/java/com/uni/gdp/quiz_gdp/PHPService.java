@@ -24,7 +24,7 @@ public class PHPService
 		{
 			sendToServer("?func=heartbeat&userId=" + DataRepo.uuid + "&name=" + DataRepo.name + "&userName=" + DataRepo.playerId, "checkOpponent", null, null, null, resultAct);
 			Log.i("PHP", "heartbeat now");
-			hbHandler.postDelayed(heartbeat, 10000);
+			hbHandler.postDelayed(heartbeat, 9000);
 		}
 	};
 
