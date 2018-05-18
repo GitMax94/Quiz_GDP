@@ -142,7 +142,8 @@ echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
 <col width="21%">
 <col width="21%">
 </colgroup>
-<button onclick="window.location.href='http://cbrell.de/bwi50207/181/op995204/QuizStream.php'">Aktualisiern</button>
+<button align="center" onclick="window.location.href='http://cbrell.de/bwi50207/181/op995204/QuizStream.php'">Aktualisiern</button>
+
 <img src="F.png"> <img src="F.png" align="center">
 </body>
 </html>
