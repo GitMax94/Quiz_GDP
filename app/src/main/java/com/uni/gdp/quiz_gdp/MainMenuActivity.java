@@ -108,11 +108,6 @@ public class MainMenuActivity extends AppCompatActivity
 
 	void setQuizzes(String s)
 	{
-		Log.i("PHP Bullshit", s);
-
-
-
-
 		String[] lines = s.split("<br>");
 		DataRepo.quizzes = new Quiz[lines.length-1];
 
@@ -138,8 +133,6 @@ public class MainMenuActivity extends AppCompatActivity
 			}
 		}
 
-		Log.i("PHP Bullshit", s);
-
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -151,6 +144,7 @@ public class MainMenuActivity extends AppCompatActivity
 	void addUser(String s)
 	{
 		DataRepo.name = player;
+		DataRepo.opponentName = player.equals("Spieler1") ? "Spieler2" : "Spieler1";
 		DataRepo.currentQuiz = 0;
 		DataRepo.currentQuestion = 0;
 		DataRepo.currentPoints = 0;

@@ -33,6 +33,8 @@ public class ResultActivity extends AppCompatActivity {
 
 		tv_result.setText(DataRepo.currentPoints + " / " + DataRepo.quizzes[DataRepo.currentQuiz].questions.length);
 		tv_perfect.setText(DataRepo.opponentPoints + " / " + DataRepo.quizzes[DataRepo.currentQuiz].questions.length);
+		tv_highscore.setText("");
+
 
 		ra = this;
 
@@ -66,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
 		@Override
 		public void run()
 		{
-			sendToServer("?func=heartbeat&userId=" + DataRepo.uuid + "&name=" + DataRepo.name + "&userName=" + DataRepo.playerId, "checkOpponent", null, null, null, ra);
+			sendToServer("?func=heartbeat&userName=" + DataRepo.name, "checkOpponent", null, null, null, ra);
 			Log.i("PHP", "heartbeat now");
 			hbHandler.postDelayed(heartbeat, 9000);
 		}
@@ -74,8 +76,22 @@ public class ResultActivity extends AppCompatActivity {
 
 	void checkOpponent(String hb)
 	{
-		DataRepo.opponentPoints = Integer.parseInt(hb);
-		tv_perfect.setText(DataRepo.opponentPoints + " / " + DataRepo.quizzes[DataRepo.currentQuiz].questions.length);
+		Log.i("Shit", "check");
+		String[] items = hb.split(";");
+		Log.i("Shit", items[0] + " " + items[1]);
+		Log.i("Shit", "?func=heartbeat&userId=" + DataRepo.uuid + "&name=" + DataRepo.name + "&userName=" + DataRepo.playerId);
+		/*DataRepo.opponentPoints = Integer.parseInt(items[0]);
+		DataRepo.opponentQuestion = Integer.parseInt(items[1]);
+
+		Log.i("Shit", DataRepo.opponentPoints + " / " + DataRepo.opponentQuestion);
+
+
+*/
+		tv_perfect.setText(items[0] + " / " + items[1]);
+		//tv_highscore.setText(items[0] + " / " + items[1]);
+
+		//tv_highscore.setText(DataRepo.opponentQuestion == DataRepo.quizzes[DataRepo.currentQuiz].questions.length ? "Quiz beendet" : "Warte auf " + DataRepo.opponentName);
+
 
 		/*String[] texts = hb.split(";");
 
