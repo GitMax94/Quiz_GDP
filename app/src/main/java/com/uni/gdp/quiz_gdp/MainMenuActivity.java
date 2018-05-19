@@ -30,6 +30,7 @@ public class MainMenuActivity extends AppCompatActivity
 		b_player2 = (Button) findViewById(R.id.b_player2);
 
 		DataRepo.name = "Spieler1";
+		tv_playerName.setText("Sie sind " + DataRepo.name);
 		mma = this;
 		PHPService.sendToServer("?func=get_quiz", "setQuiz", this, null, null);
 		PHPService.heartbeat.run();
@@ -48,8 +49,8 @@ public class MainMenuActivity extends AppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				DataRepo.name = "Sie sind Spieler1";
-				tv_playerName.setText(DataRepo.name);
+				DataRepo.name = "Spieler1";
+				tv_playerName.setText("Sie sind " + DataRepo.name);
 			}
 		});
 
@@ -58,8 +59,8 @@ public class MainMenuActivity extends AppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				DataRepo.name = "Sie sind Spieler2";
-				tv_playerName.setText(DataRepo.name);
+				DataRepo.name = "Spieler2";
+				tv_playerName.setText("Sie sind " + DataRepo.name);
 			}
 		});
     }
