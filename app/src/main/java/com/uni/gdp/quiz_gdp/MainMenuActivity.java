@@ -30,8 +30,9 @@ public class MainMenuActivity extends AppCompatActivity
 		b_player2 = (Button) findViewById(R.id.b_player2);
 
 		DataRepo.name = "Spieler1";
+		tv_playerName.setText("Sie sind " + DataRepo.name);
 		mma = this;
-		PHPService.sendToServer("?func=get_quizzes", "setQuiz", this, null, null);
+		PHPService.sendToServer("?func=get_quiz", "setQuiz", this, null, null);
 		PHPService.heartbeat.run();
 
 		b_startquiz.setOnClickListener( new View.OnClickListener()
@@ -39,7 +40,7 @@ public class MainMenuActivity extends AppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				PHPService.sendToServer("?func=add_user&userName=" + DataRepo.name + "&userId=" + "0000" + "&name" + DataRepo.name, "addUser", mma, null, null);
+				PHPService.sendToServer("?func=add_user&userName=" + DataRepo.name, "addUser", mma, null, null);
 			}
 		});
 
@@ -49,7 +50,7 @@ public class MainMenuActivity extends AppCompatActivity
 			public void onClick(View v)
 			{
 				DataRepo.name = "Spieler1";
-				tv_playerName.setText(DataRepo.name);
+				tv_playerName.setText("Sie sind " + DataRepo.name);
 			}
 		});
 
@@ -59,7 +60,7 @@ public class MainMenuActivity extends AppCompatActivity
 			public void onClick(View v)
 			{
 				DataRepo.name = "Spieler2";
-				tv_playerName.setText(DataRepo.name);
+				tv_playerName.setText("Sie sind " + DataRepo.name);
 			}
 		});
     }
@@ -68,7 +69,8 @@ public class MainMenuActivity extends AppCompatActivity
 	//from PHP
 	void setQuiz(String s)
 	{
-		String[] line = s.split("<br>")[0].split(";");
+		//String[] line = s.split("<br>")[0].split(";");
+		String[] line = s.split(";");
 		DataRepo.quiz = new Quiz();
 
 		DataRepo.quiz.name = line[0];
