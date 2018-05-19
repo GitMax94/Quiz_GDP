@@ -56,7 +56,7 @@ function answer($userName,$answerId,$isCorrect,$totalPoints){
 			$zeile2++;
 		}
 	$points=$array2[$zeile2-1][2];
-	$questions=$zeile2;
+
 	}elseif($userName == "Spieler2"){
 		$saveRow = $answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
 		$save = fopen("Spieler2.csv", "a");
@@ -70,9 +70,9 @@ function answer($userName,$answerId,$isCorrect,$totalPoints){
 			$zeile2++;
 		}
 		$points = $array2[$zeile2-1][2];
-		$questions = $zeile2;
+
 	}
-	$points.';'.$questions;
+	echo $points;
 }
 
 function heartbeat($userName){
@@ -110,10 +110,10 @@ function FragenSenden(){
 			$i=0;
 			while($i<$LaengeArray){
 				if($LaengeArray-1 == $i){
-					echo $csvLesen[$i]; 
+					echo $csvLesen[$i];
 					$i++;
 				}else{
-					echo $csvLesen[$i].';'; 
+					echo $csvLesen[$i].';';
 					$i++;
 				}
 			}
