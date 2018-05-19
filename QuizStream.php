@@ -70,7 +70,6 @@ $array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile]
 $zeile3++;
 }
 
-echo "<h1>Es wurde Folgendes Quiz ausgewählt: ".$array3[$quizID-1][0]."<h1>";}
 
  $zeile2 = 0;
  $array2 = array();
@@ -155,7 +154,7 @@ echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
 <script language="JavaScript">
 window.setTimeout("location.reload()",5000);
 </script>
-  <div align="center"><button  onclick="window.location.href='http://cbrell.de/bwi50207/181/op995204/QuizStream.php'">Aktualisiern</button></div>
+
 <colgroup>
   <!-- tabelen Weite -->
 <col width="37%">
