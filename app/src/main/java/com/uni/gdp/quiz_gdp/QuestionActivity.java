@@ -75,6 +75,7 @@ public class QuestionActivity extends AppCompatActivity
 		if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 		{
 			ab.setTitle("Frage " + (DataRepo.currentQuestion+1) + " (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")");
+
 			tv_question.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].question);
 			b_answer1.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[0]);
 			b_answer2.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[1]);
