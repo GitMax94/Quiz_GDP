@@ -2,7 +2,7 @@
 <style>
 
       table {
-        width:100%;
+        width:80%;
       }
       td {
         border:1px solid;
@@ -103,7 +103,7 @@ $zeile5++;
 $i=1;
 $z=0; $ii=1;
 echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
-while($i<=270){
+while($i<=264){
 $richtig = $array3[$quizID-1][$i+1];
 $rAntwort = $richtig+1+$i;
 
@@ -137,7 +137,7 @@ if($zeile5>=$ii)
 }
 else{$s2="normal";$antwort4="Warte auf Antwort";}
 
-echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$antwort3."</th> <th class =  ".$s2.">".$antwort4."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
+echo "<tr> <th align=\"left\">".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$antwort3."</th> <th class =  ".$s2.">".$antwort4."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;
 $z++;$ii++;
 }
@@ -157,10 +157,10 @@ window.setTimeout("location.reload()",5000);
 
 <colgroup>
   <!-- tabelen Weite -->
-<col width="37%">
-<col width="21%">
-<col width="21%">
-<col width="21%">
+<col width="31%">
+<col width="23%">
+<col width="23%">
+<col width="22%">
 </colgroup>
 
 

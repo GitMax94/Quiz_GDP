@@ -210,7 +210,7 @@ function FragenSenden($array){
 		$zeile = 0;
 		$array = array();
 		$lesen = fopen("Fragen.csv", "r");
-		while(($csvLesen = fgetcsv($lesen, 1000, ";")) !== FALSE){
+		while(($csvLesen = fgetcsv($lesen, 100000, ";")) !== FALSE){
 			$LaengeArray = count($csvLesen);
 			$i=0;
 			while($i<$LaengeArray){
@@ -229,7 +229,7 @@ function FragenEinlesen(){
 		$zeile = 0;
 		$array = array();
 		$lesen = fopen("Fragen.csv", "r");
-		while(($csvLesen = fgetcsv($lesen, 1000, ";")) !== FALSE){
+		while(($csvLesen = fgetcsv($lesen, 1000000, ";")) !== FALSE){
 			$array[$zeile] = $csvLesen;
 			$zeile++;
 		}
