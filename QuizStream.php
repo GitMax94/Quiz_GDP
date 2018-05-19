@@ -113,7 +113,7 @@ $s2Antwort = $array5[$z][0]+1+$i;
 if($s1Antwort==$rAntwort){
 $s1 = "richtig";
 }else{
-  if($zähler3<$i)
+  if($zeile3<$i)
   {
 $s1 = "falsch";}
 else{$s1="Warte auf Antwort";}
@@ -125,19 +125,19 @@ $s2 = "richtig";
 }
 
 else{
-  if($zähler4<=$i)
+  if($zeile4<=$i)
   {
 $s2 = "falsch";}
 else{$s2="Warte auf Antwort";}
 }
 
-if($zähler4<=$i)
+if($zeile4<=$i)
 {
   $antwort4=$array4[$quizID-1][$s2Antwort];
 }
 else{$antwort4="Warte auf Antwort";}
 
-if($zähler3<$i)
+if($zeile3<$i)
 {
   $antwort3=$array3[$quizID-1][$s1Antwort];
 }
