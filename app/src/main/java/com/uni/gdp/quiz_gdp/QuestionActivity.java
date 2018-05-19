@@ -75,6 +75,7 @@ public class QuestionActivity extends AppCompatActivity
 	{
 		ab.setTitle("Frage " + (DataRepo.currentQuestion+1));
 		tv_question.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].question);
+		tv_question.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].question + " (" + (DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].correctId) + ")");
 		b_answer1.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[0]);
 		b_answer2.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[1]);
 		b_answer3.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[2]);

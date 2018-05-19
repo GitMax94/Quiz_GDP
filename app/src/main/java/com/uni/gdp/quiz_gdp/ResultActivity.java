@@ -74,12 +74,8 @@ public class ResultActivity extends AppCompatActivity {
 
 	void checkOpponent(String hb)
 	{
-		String[] items = hb.split(";");
-
-		tv_perfect.setText(items[1] + ": " + items[2] + " / " + items[3]);
-
-
-
+		DataRepo.opponentPoints = Integer.parseInt(hb);
+		tv_perfect.setText(DataRepo.opponentPoints + " / " + DataRepo.quizzes[DataRepo.currentQuiz].questions.length);
 
 		/*String[] texts = hb.split(";");
 
