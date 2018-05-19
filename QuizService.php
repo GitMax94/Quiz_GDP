@@ -25,7 +25,7 @@ if(isset($func)){
   if ($func=="add_user")
   {
 
-	add_user($userId,$name);
+	add_user($userName,$userId,$name);
   }
 
   if ($func=="answer")
