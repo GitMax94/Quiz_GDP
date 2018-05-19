@@ -104,7 +104,7 @@ function add_user($userName,$userId,$name){
 			$zeile++;
 			}
     $quizID=$array1[$zeile-1][0];
-   echo "Spieler2".';'.$quizID;}
+   echo "Spieler2";}
  }
  if($count==2){
    echo "error";}
