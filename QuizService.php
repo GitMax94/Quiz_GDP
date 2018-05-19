@@ -150,8 +150,33 @@ function choose_quiz($quizID){
 }
 
 function heartbeat($userId,$name,$userName){
+	$zeitstempel = time();
+	$saveRow = $userId."\r\n";
+	 $saveRow =$userId.';'.$name.';'.$zeitstempel.';'.$userName."\r\n";
+	$save = fopen("SpielerListe.csv", "a");
+	fwrite($save, $saveRow);
+	fclose($save);
 
-  if($userName=="Spieler2"){
+	$zeile = 0;
+	$array = array();
+	$lesen = fopen("SpielerListe.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
+	while(($csvLesen = fgetcsv($lesen, 1000, ";")) !== FALSE){ 																				//Datei die gelesen wird(Standortdaten.csv), max. Zeichen (1000), Trennzeichen (;)
+		$array[$zeile] = $csvLesen; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
+		$zeile++;
+	}
+
+	$i=0; $count=0;
+	while($i<$zeile){
+		$zeitstempel = time();
+		$Differenz = $zeitstempel - $array[$i][2]; $i++;
+		if($Differenz < 10){
+			$count++;
+		}
+	}
+
+	if($count==2){
+		if($userId==$array[0][0]){
+			$opponentName=$array[1][1];
 			$zeile2 = 0;
 			$array2 = array();
 			$lesen2= fopen("Spieler2.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
@@ -160,9 +185,10 @@ function heartbeat($userId,$name,$userName){
 				$zeile2++;
 			}
 		$points=$array2[$zeile2-1][2];
-		$questions=$zeile2-1;}
-  }
-		else{	
+		$questions=$zeile2-1;
+		}
+		else{
+			$opponentName=$array[0][1];
 			$zeile2 = 0;
 			$array2 = array();
 			$lesen2= fopen("Spieler1.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
@@ -173,9 +199,11 @@ function heartbeat($userId,$name,$userName){
 		$points=$array2[$zeile2-1][2];
 		$questions=$zeile2-1;
 		}
-		echo $points.';'.$questions;
-
-
+		echo 'true'.';'.$opponentName.';'.$points.';'.$questions;
+	}
+	else{
+		echo 'false';
+	}
 }
 function FragenSenden($array){
 	if(file_exists("Fragen.csv")){
