@@ -37,7 +37,7 @@ if(isset($func)){
     ende($userId, $userName);
   }
   if($func=="heartbeat"){
-	heartbeat($name);
+	heartbeat($userName);
   }
   if($func=="choose_quiz"){
 	choose_quiz($quizID);
@@ -149,7 +149,7 @@ function choose_quiz($quizID){
 	return $quizCsv;
 }
 
-function heartbeat($userId,$name){
+function heartbeat($userName){
 
   if($name=="Spieler2"){
 			$zeile2 = 0;
