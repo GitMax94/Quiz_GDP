@@ -151,7 +151,7 @@ function choose_quiz($quizID){
 
 function heartbeat($userName){
 
-  if($userName=="Spieler2"){
+  if($userName=="Spieler1"){
 			$zeile2 = 0;
 			$array2 = array();
 			$lesen2= fopen("Spieler2.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
