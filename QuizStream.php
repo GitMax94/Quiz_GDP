@@ -110,38 +110,30 @@ $rAntwort = $richtig+1+$i;
 
 $s1Antwort = $array4[$z][0]+1+$i;
 $s2Antwort = $array5[$z][0]+1+$i;
-if($s1Antwort==$rAntwort){
-$s1 = "richtig";
-}else{
-  if($zeile3<$i)
-  {
-$s1 = "falsch";}
-else{$s1="Warte auf Antwort";}
-}
-
-// Noch keine antwort
-if($s2Antwort==$rAntwort){
-$s2 = "richtig";
-}
-
-else{
-  if($zeile4<=$i)
-  {
-$s2 = "falsch";}
-else{$s2="Warte auf Antwort";}
-}
-
-if($zeile4<=$i)
-{
-  $antwort4=$array4[$quizID-1][$s2Antwort];
-}
-else{$antwort4="Warte auf Antwort";}
 
 if($zeile3<$i)
 {
-  $antwort3=$array3[$quizID-1][$s1Antwort];
+
+  if($s1Antwort==$rAntwort){
+      $antwort3=$array3[$quizID-1][$s1Antwort];
+  $s1 = "richtig";
+  }else{
+    if($zeile3<$i)
+    {
+  $s1 = "falsch";}
+
 }
-else{$antwort4="Warte auf Antwort";}
+else{  $s1 = "normal"; $antwort3="Warte auf Antwort";}
+
+if($zeile4<=$i)
+{
+  if($s2Antwort==$rAntwort){
+  $s2 = "richtig";  $antwort4=$array4[$quizID-1][$s2Antwort];
+  }
+  else{$s2="normal";$antwort4="Warte auf Antwort";}
+
+
+}
 
 echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$antwort3."</th> <th class =  ".$s2.">".$antwort4."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;
