@@ -143,7 +143,7 @@ if($zähler3<$i)
 }
 else{$antwort4="Warte auf Antwort";}
 
-echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$array3[$quizID-1][$s1Antwort]."</th> <th class =  ".$s2.">".$antwort4."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
+echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$antwort3."</th> <th class =  ".$s2.">".$antwort4."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;
 $z++;
 }
