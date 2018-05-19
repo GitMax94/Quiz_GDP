@@ -42,7 +42,7 @@ public class ResultActivity extends AppCompatActivity {
 		public void run()
 		{
 			sendToServer("?func=heartbeat&userName=" + DataRepo.name, "checkOpponent", null, null, ra);
-			Log.i("PHP", "heartbeat now");
+			Log.i("PHP Output", "Heartbeat now");
 			hbHandler.postDelayed(heartbeat, 9000);
 		}
 	};

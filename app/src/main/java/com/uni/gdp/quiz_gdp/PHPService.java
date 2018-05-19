@@ -15,18 +15,6 @@ import java.net.URLEncoder;
 
 class PHPService
 {
-	private final static Handler hbHandler = new Handler();
-	static Runnable heartbeat = new Runnable()
-	{
-		@Override
-		public void run()
-		{
-			sendToServer("?func=heartbeat&userId=" + "0000" + "&name=" + DataRepo.name + "&userName=" + "0", "checkOpponent", null, null, null);
-			Log.i("PHP", "heartbeat now");
-			hbHandler.postDelayed(heartbeat, 9000);
-		}
-	};
-
 
 	static void sendToServer(final String phpParams, final String methodName, final MainMenuActivity mainMenu, final QuestionActivity question, final ResultActivity result)
 	{
@@ -63,12 +51,10 @@ class PHPService
 
 					final String phpOutput2 = phpOutput.toString();
 
-					Log.i("PHP Bullshit", phpOutput2);
+					Log.i("PHP Output", phpOutput2);
 
 					answerInputStream.close();
 					HttpURLVerbindung.disconnect();
-
-					Log.i("PHP Output", phpOutput.toString());
 
 					if (!methodName.isEmpty())
 					{

@@ -33,7 +33,7 @@ public class MainMenuActivity extends AppCompatActivity
 		tv_playerName.setText("Sie sind " + DataRepo.name);
 		mma = this;
 		PHPService.sendToServer("?func=get_quiz", "setQuiz", this, null, null);
-		PHPService.heartbeat.run();
+		//PHPService.heartbeat.run();
 
 		b_startquiz.setOnClickListener( new View.OnClickListener()
 		{
