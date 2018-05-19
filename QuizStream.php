@@ -122,6 +122,7 @@ if($zeile3<$i)
   $s1 = "falsch";  $antwort3=$array3[$quizID-1][$s1Antwort];
 
 }
+}
 else{  $s1 = "normal"; $antwort3="Warte auf Antwort";}
 
 if($zeile4<=$i)
