@@ -71,7 +71,7 @@ public class QuestionActivity extends AppCompatActivity
 
 	private void SetQuestion()
 	{
-		ab.setTitle("Frage " + (DataRepo.currentQuestion+1));
+		ab.setTitle("Frage " + (DataRepo.currentQuestion+1) + " " + DataRepo.name + " " + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + " " + DataRepo.opponentName);
 		tv_question.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].question);
 		b_answer1.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[0]);
 		b_answer2.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[1]);
@@ -105,6 +105,7 @@ public class QuestionActivity extends AppCompatActivity
 
 	public void GetOpponent(String s)
 	{
+
 		DataRepo.opponentPoints = Integer.parseInt(s.trim());
 	}
 

@@ -13,6 +13,7 @@ public class ResultActivity extends AppCompatActivity {
 	TextView tv_result_title2;
 	TextView tv_result;
 	TextView tv_result_opponent;
+	TextView tv_final;
 
 	static ResultActivity ra;
 
@@ -24,6 +25,7 @@ public class ResultActivity extends AppCompatActivity {
 		tv_result = (TextView)findViewById(R.id.tv_result);
 		tv_result_title2 = (TextView)findViewById(R.id.tv_result_title2);
 		tv_result_opponent = (TextView)findViewById(R.id.tv_result_opponent);
+		tv_final = (TextView)findViewById(R.id.tv_final);
 
 		tv_result.setText(DataRepo.currentPoints + " / " + DataRepo.quiz.questions.length);
 		tv_result_opponent.setText(DataRepo.opponentPoints + " / " + DataRepo.quiz.questions.length);
@@ -50,5 +52,10 @@ public class ResultActivity extends AppCompatActivity {
 	{
 		String[] items = hb.split(";");
 		tv_result_opponent.setText(items[0] + " / " + items[1]);
+
+		if (DataRepo.quiz.questions.length == Integer.parseInt(items[1].trim()))
+		{
+			tv_final.setText("Quiz beendet");
+		}
 	}
 }
