@@ -102,7 +102,7 @@ $zeile5++;
 }
 
 $i=1;
-$z=0;
+$z=0; $ii=1;
 echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
 while($i<=270){
 $richtig = $array3[$quizID-1][$i+1];
@@ -111,7 +111,7 @@ $rAntwort = $richtig+1+$i;
 $s1Antwort = $array4[$z][0]+1+$i;
 $s2Antwort = $array5[$z][0]+1+$i;
 
-if($zeile4>=$i)
+if($zeile4>=$ii)
 {
 
   if($s1Antwort==$rAntwort){
@@ -125,7 +125,7 @@ if($zeile4>=$i)
 }
 else{  $s1 = "normal"; $antwort3="Warte auf Antwort";}
 
-if($zeile5>=$i)
+if($zeile5>=$ii)
 {
   if($s2Antwort==$rAntwort){
   $s2 = "richtig";  $antwort4=$array3[$quizID-1][$s2Antwort];
@@ -140,7 +140,7 @@ else{$s2="normal";$antwort4="Warte auf Antwort";}
 
 echo "<tr class=normal> <th>".$array3[$quizID-1][$i]."</th> <th class = ".$s1.">".$antwort3."</th> <th class =  ".$s2.">".$antwort4."</th> <th>".$array3[$quizID-1][$rAntwort]."</th> </tr>";
 $i= $i+6;
-$z++;
+$z++;$ii++;
 }
 
 echo "</table>";
