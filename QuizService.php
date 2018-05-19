@@ -160,9 +160,9 @@ function heartbeat($userId,$name,$userName){
 				$zeile2++;
 			}
 		$points=$array2[$zeile2-1][2];
-		$questions=$zeile2-1;}
-  }
-		else{	
+		$questions=$zeile2;}
+
+		else{
 			$zeile2 = 0;
 			$array2 = array();
 			$lesen2= fopen("Spieler1.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
@@ -171,7 +171,7 @@ function heartbeat($userId,$name,$userName){
 				$zeile2++;
 			}
 		$points=$array2[$zeile2-1][2];
-		$questions=$zeile2-1;
+		$questions=$zeile2;
 		}
 		echo $points.';'.$questions;
 
