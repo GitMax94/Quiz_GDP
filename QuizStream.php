@@ -2,7 +2,7 @@
 <style>
 
       table {
-        width:80%;
+        width:60%;
       }
       td {
         border:1px solid;
@@ -78,7 +78,7 @@ $zeile3++;
    $array2[$zeile2] = $csvLesen2; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
    $zeile2++;
    }
-echo"  <div class=spieler><h1>Quiz Spiel Stream Spieler1 vs Spieler2 <h1></div>";
+echo"  <div class=spieler><h1>Spieler1 vs Spieler2 <h1></div>";
 
 echo "<div class=tabellehintergrund>";
 echo "<table border=1 width= 100% align=center>";
@@ -99,6 +99,12 @@ while(($csvLesen5 = fgetcsv($lesen5, 0, ";")) !== FALSE){ 																				//
 $array5[$zeile5] = $csvLesen5; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
 $zeile5++;
 }
+
+
+if($array4[$zeile4-1][2]==""){$punkte1="0";}else{$punkte1=$array4[$zeile4-1][2];}
+if($array5[$zeile5-1][2]==""){$punkte2="0";}else{$punkte2=$array5[$zeile5-1][2];}
+
+echo " <div class=spieler><h1>".$punkte1.":".$punkte2."</h1></div>";
 
 $i=1;
 $z=0; $ii=1;
@@ -145,8 +151,7 @@ $z++;$ii++;
 echo "</table>";
 echo "</div>";
 
-echo  "<p align=center> Spieler1 vs Spieler2 </p>";
-echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
+
 ?>
 <br> </br>
 </head>
@@ -155,15 +160,8 @@ echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
 window.setTimeout("location.reload()",3000);
 </script>
 
-<colgroup>
-  <!-- tabelen Weite -->
-<col width="31%">
-<col width="23%">
-<col width="23%">
-<col width="22%">
-</colgroup>
 
 
-<img src="F.png"> <img src="F.png" align="center">
+
 </body>
 </html>
