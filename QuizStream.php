@@ -152,7 +152,7 @@ echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
 </head>
 <body >
 <script language="JavaScript">
-window.setTimeout("location.reload()",5000);
+window.setTimeout("location.reload()",1000);
 </script>
 
 <colgroup>
