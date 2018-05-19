@@ -64,6 +64,8 @@ public class PHPService
 
 					final String phpOutput2 = phpOutput.toString();
 
+					Log.i("PHP Bullshit", phpOutput2);
+
 					answerInputStream.close();
 					HttpURLVerbindung.disconnect();
 

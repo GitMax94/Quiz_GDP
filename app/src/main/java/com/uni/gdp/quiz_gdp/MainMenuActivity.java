@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -107,6 +108,11 @@ public class MainMenuActivity extends AppCompatActivity
 
 	void setQuizzes(String s)
 	{
+		Log.i("PHP Bullshit", s);
+
+
+
+
 		String[] lines = s.split("<br>");
 		DataRepo.quizzes = new Quiz[lines.length-1];
 
@@ -131,6 +137,9 @@ public class MainMenuActivity extends AppCompatActivity
 				k++;
 			}
 		}
+
+		Log.i("PHP Bullshit", s);
+
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -141,6 +150,7 @@ public class MainMenuActivity extends AppCompatActivity
 
 	void addUser(String s)
 	{
+		DataRepo.name = player;
 		DataRepo.currentQuiz = 0;
 		DataRepo.currentQuestion = 0;
 		DataRepo.currentPoints = 0;
