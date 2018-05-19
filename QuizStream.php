@@ -104,7 +104,7 @@ $zeile5++;
 $i=1;
 $z=0;
 echo "<tr class=normal> <th>Frage</th> <th>Spieler1 Antwort</th> <th>Spieler2 Antwort</th> <th>Richtig Antwort</th> </tr>";
-while($i<=90){
+while($i<=270){
 $richtig = $array3[$quizID-1][$i+1];
 $rAntwort = $richtig+1+$i;
 
