@@ -121,13 +121,13 @@ echo "Spieler1";}
 }
 
 function answer($userName,$answerId,$isCorrect,$totalPoints){
-  if($name=="Spieler1"){
+  if($userName=="Spieler1"){
   $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
   $save = fopen("Spieler1.csv", "a");
   fwrite($save, $saveRow);
   fclose($save);}
 
-  elseif($name=="Spieler2"){
+  elseif($userName=="Spieler2"){
     $saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
     $save = fopen("Spieler2.csv", "a");
     fwrite($save, $saveRow);
@@ -151,7 +151,7 @@ function choose_quiz($quizID){
 
 function heartbeat($userId,$name,$userName){
 
-  if($userName=="Spieler1"){
+  if($userName=="Spieler2"){
 			$zeile2 = 0;
 			$array2 = array();
 			$lesen2= fopen("Spieler2.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
