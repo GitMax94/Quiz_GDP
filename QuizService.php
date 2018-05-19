@@ -37,7 +37,7 @@ if(isset($func)){
     ende($userId, $userName);
   }
   if($func=="heartbeat"){
-	heartbeat($userId,$name,$userName);
+	heartbeat($name);
   }
   if($func=="choose_quiz"){
 	choose_quiz($quizID);
@@ -149,9 +149,9 @@ function choose_quiz($quizID){
 	return $quizCsv;
 }
 
-function heartbeat($userId,$name,$userName){
+function heartbeat($userId,$name){
 
-  if($userName=="Spieler2"){
+  if($name=="Spieler2"){
 			$zeile2 = 0;
 			$array2 = array();
 			$lesen2= fopen("Spieler2.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und pr�ft diese auf Semikolon-Separierte-Werte (CSV)
