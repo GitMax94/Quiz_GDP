@@ -68,9 +68,9 @@ function add_user($userName,$userId,$name){
 			if(file_exists("quizID.csv")){
 				$zeile = 0;
 				$array1 = array();
-				$lesen = fopen("quizID.csv", "r");																								
-				while(($csvLesen = fgetcsv($lesen, 1000000, ";")) !== FALSE){ 																				
-					$array1[$zeile] = $csvLesen; 																										
+				$lesen = fopen("quizID.csv", "r");
+				while(($csvLesen = fgetcsv($lesen, 1000000, ";")) !== FALSE){
+					$array1[$zeile] = $csvLesen;
 					$zeile++;
 				}
 				$quizID=$array1[$zeile-1][0];
@@ -97,12 +97,34 @@ function answer($userName,$answerId,$isCorrect,$totalPoints){
 		$save = fopen("Spieler1.csv", "a");
 		fwrite($save, $saveRow);
 		fclose($save);
+
+		$zeile2 = 0;
+		$array2 = array();
+		$lesen2= fopen("Spieler2.csv", "r");
+		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){
+			$array2[$zeile2] = $csvLesen2;
+			$zeile2++;
+		}
+	$points=$array2[$zeile2-1][2];
+	$questions=$zeile2;
+
 	}elseif($userName=="Spieler2"){
 		$saveRow =$answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
 		$save = fopen("Spieler2.csv", "a");
 		fwrite($save, $saveRow);
 		fclose($save);
+
+		$zeile2 = 0;
+		$array2 = array();
+		$lesen2= fopen("Spieler1.csv", "r");
+		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){
+			$array2[$zeile2] = $csvLesen2;
+			$zeile2++;
+		}
+		$points=$array2[$zeile2-1][2];
+		$questions=$zeile2;
 	}
+	$points.';'.$questions;
 }
 
 function choose_quiz($quizID){
@@ -121,19 +143,19 @@ function heartbeat($userName){
 	if($userName=="Spieler1"){
 		$zeile2 = 0;
 		$array2 = array();
-		$lesen2= fopen("Spieler2.csv", "r");																								
-		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){ 																				
-			$array2[$zeile2] = $csvLesen2; 																										
+		$lesen2= fopen("Spieler2.csv", "r");
+		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){
+			$array2[$zeile2] = $csvLesen2;
 			$zeile2++;
-		}		
+		}
 	$points=$array2[$zeile2-1][2];
 	$questions=$zeile2;
 	}else{
 		$zeile2 = 0;
 		$array2 = array();
-		$lesen2= fopen("Spieler1.csv", "r");																								
-		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){ 																				
-			$array2[$zeile2] = $csvLesen2; 																										
+		$lesen2= fopen("Spieler1.csv", "r");
+		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){
+			$array2[$zeile2] = $csvLesen2;
 			$zeile2++;
 		}
 		$points=$array2[$zeile2-1][2];
