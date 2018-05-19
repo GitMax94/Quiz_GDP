@@ -174,5 +174,4 @@ function FragenEinlesen(){
 		return $array;
 	}
 }
-
 ?>
