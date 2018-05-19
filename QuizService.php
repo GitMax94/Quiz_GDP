@@ -76,7 +76,7 @@ function add_user($userName,$userId,$name){
 
     if(file_exists("SpielerListe.csv")){// prueft ob datei da ist
 
-
+      $zeitstempel = time();
 
  if($userName=="Spieler1"){
    $userName="Spieler1";
