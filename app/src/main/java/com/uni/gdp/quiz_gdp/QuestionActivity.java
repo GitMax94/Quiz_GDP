@@ -28,7 +28,7 @@ public class QuestionActivity extends AppCompatActivity
         setContentView(R.layout.activity_question);
 
         ab = getSupportActionBar();
-		ab.setTitle("Frage " + (DataRepo.currentQuestion+1));
+		ab.setTitle("Frage " + (DataRepo.currentQuestion+1) + " " + DataRepo.name + " " + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + " " + DataRepo.opponentName);
 
 		tv_question = (TextView)findViewById(R.id.tv_question);
 		b_answer1 = (Button)findViewById(R.id.b_answer1);
@@ -88,7 +88,7 @@ public class QuestionActivity extends AppCompatActivity
 
 			String phpIsCorrect = DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == (id+1) ? "true" : "false";
 
-			PHPService.sendToServer("?func=answer&userName=" + DataRepo.name + "&answerId=" + (id+1) + "&isCorrect=" + phpIsCorrect + "&totalPoints=" + DataRepo.currentPoints, "", null, null, null);
+			PHPService.sendToServer("?func=answer&userName=" + DataRepo.name + "&answerId=" + (id+1) + "&isCorrect=" + phpIsCorrect + "&totalPoints=" + DataRepo.currentPoints, "getOpponent", null, this, null);
 			DataRepo.currentQuestion++;
 			if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 			{
@@ -101,6 +101,11 @@ public class QuestionActivity extends AppCompatActivity
 				finish();
 			}
 		}
+	}
+
+	public void GetOpponent(String s)
+	{
+		DataRepo.opponentPoints = Integer.parseInt(s.trim());
 	}
 
 	@Override
