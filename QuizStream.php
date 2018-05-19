@@ -78,7 +78,7 @@ $zeile3++;
    $array2[$zeile2] = $csvLesen2; 																										//Doppel Array, [Zeile][0=Nutzer_ID, 1=Name, 2=Zeit, 3=Laengengrad, 4=Breitengrad, 5=Aktualisierungsintervall] NUR NR.
    $zeile2++;
    }
-echo"  <div class=spieler><h1>Quiz Spiel Stream ".$array2[$zeile2-2][1]." vs ".$array2[$zeile2-1][1]."<h1></div>";
+echo"  <div class=spieler><h1>Quiz Spiel Stream Spieler1 vs Spieler2 <h1></div>";
 
 echo "<div class=tabellehintergrund>";
 echo "<table border=1 width= 100% align=center>";
@@ -145,14 +145,14 @@ $z++;$ii++;
 echo "</table>";
 echo "</div>";
 
-echo  "<p align=center>".$array2[$zeile2-2][1]." vs ".$array2[$zeile2-1][1]."</p>";
+echo  "<p align=center> Spieler1 vs Spieler2 </p>";
 echo "<p align=center>".$array4[$zeile4-1][2].":".$array5[$zeile5-1][2]."</p>";
 ?>
 <br> </br>
 </head>
 <body >
 <script language="JavaScript">
-window.setTimeout("location.reload()",1000);
+window.setTimeout("location.reload()",3000);
 </script>
 
 <colgroup>
