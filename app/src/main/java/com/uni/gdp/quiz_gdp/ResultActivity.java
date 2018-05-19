@@ -1,24 +1,18 @@
 package com.uni.gdp.quiz_gdp;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Visibility;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import static com.uni.gdp.quiz_gdp.PHPService.resultAct;
 import static com.uni.gdp.quiz_gdp.PHPService.sendToServer;
 
 public class ResultActivity extends AppCompatActivity {
 
+	TextView tv_result_title2;
 	TextView tv_result;
-	TextView tv_perfect;
-	TextView tv_highscore;
+	TextView tv_result_opponent;
 
 	static ResultActivity ra;
 
@@ -28,38 +22,15 @@ public class ResultActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_result);
 
 		tv_result = (TextView)findViewById(R.id.tv_result);
-		tv_perfect = (TextView)findViewById(R.id.tv_perfect);
-		tv_highscore = (TextView)findViewById(R.id.tv_highscore);
+		tv_result_title2 = (TextView)findViewById(R.id.tv_result_title2);
+		tv_result_opponent = (TextView)findViewById(R.id.tv_result_opponent);
 
-		tv_result.setText(DataRepo.currentPoints + " / " + DataRepo.quizzes[DataRepo.currentQuiz].questions.length);
-		tv_perfect.setText(DataRepo.opponentPoints + " / " + DataRepo.quizzes[DataRepo.currentQuiz].questions.length);
-		tv_highscore.setText("");
-
-
+		tv_result.setText(DataRepo.currentPoints + " / " + DataRepo.quiz.questions.length);
+		tv_result_opponent.setText(DataRepo.opponentPoints + " / " + DataRepo.quiz.questions.length);
+		tv_result_title2.setText(DataRepo.opponentName + " Ergebnis:");
 		ra = this;
 
 		heartbeat.run();
-
-
-		/*
-		if (DataRepo.quizzes[DataRepo.currentQuiz].bestScore < DataRepo.currentPoints)
-		{
-			SharedPreferences.Editor editor = DataRepo.localData.edit();
-			editor.putInt("best", DataRepo.currentPoints);
-			editor.apply();
-			DataRepo.quizzes[DataRepo.currentQuiz].bestScore = DataRepo.currentPoints;
-			tv_highscore.setVisibility(View.VISIBLE);
-		}
-		else { tv_highscore.setVisibility(View.GONE); }
-
-		if (DataRepo.currentPoints == DataRepo.quizzes[DataRepo.currentQuiz].questions.length)
-			 { tv_perfect.setVisibility(View.VISIBLE); }
-		else { tv_perfect.setVisibility(View.GONE); }*/
-
-
-
-		//startActivity(new Intent(ResultActivity.this, MainMenuActivity.class));
-
 	}
 
 	final static Handler hbHandler = new Handler();
@@ -68,42 +39,16 @@ public class ResultActivity extends AppCompatActivity {
 		@Override
 		public void run()
 		{
-			sendToServer("?func=heartbeat&userName=" + DataRepo.name, "checkOpponent", null, null, null, ra);
+			sendToServer("?func=heartbeat&userName=" + DataRepo.name, "checkOpponent", null, null, ra);
 			Log.i("PHP", "heartbeat now");
 			hbHandler.postDelayed(heartbeat, 9000);
 		}
 	};
 
+	//from php
 	void checkOpponent(String hb)
 	{
-		Log.i("Shit", "check");
 		String[] items = hb.split(";");
-		Log.i("Shit", items[0] + " " + items[1]);
-		Log.i("Shit", "?func=heartbeat&userId=" + DataRepo.uuid + "&name=" + DataRepo.name + "&userName=" + DataRepo.playerId);
-		/*DataRepo.opponentPoints = Integer.parseInt(items[0]);
-		DataRepo.opponentQuestion = Integer.parseInt(items[1]);
-
-		Log.i("Shit", DataRepo.opponentPoints + " / " + DataRepo.opponentQuestion);
-
-
-*/
-		tv_perfect.setText(items[0] + " / " + items[1]);
-		//tv_highscore.setText(items[0] + " / " + items[1]);
-
-		//tv_highscore.setText(DataRepo.opponentQuestion == DataRepo.quizzes[DataRepo.currentQuiz].questions.length ? "Quiz beendet" : "Warte auf " + DataRepo.opponentName);
-
-
-		/*String[] texts = hb.split(";");
-
-		//texts[0]
-		DataRepo.opponentName = texts[1];
-		DataRepo.opponentPoints = Integer.parseInt(texts[2]);
-		DataRepo.opponentQuestion = Integer.parseInt(texts[3]);*/
-		//returns isOnline (true/false), opponentName, points (int), questions (int)
-
-
-
-
-
+		tv_result_opponent.setText(items[0] + " / " + items[1]);
 	}
 }

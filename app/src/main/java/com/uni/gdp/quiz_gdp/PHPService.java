@@ -13,23 +13,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class PHPService
+class PHPService
 {
-	static ResultActivity resultAct;
-	final static Handler hbHandler = new Handler();
+	private final static Handler hbHandler = new Handler();
 	static Runnable heartbeat = new Runnable()
 	{
 		@Override
 		public void run()
 		{
-			sendToServer("?func=heartbeat&userId=" + DataRepo.uuid + "&name=" + DataRepo.name + "&userName=" + DataRepo.playerId, "checkOpponent", null, null, null, resultAct);
+			sendToServer("?func=heartbeat&userId=" + "0000" + "&name=" + DataRepo.name + "&userName=" + "0", "checkOpponent", null, null, null);
 			Log.i("PHP", "heartbeat now");
 			hbHandler.postDelayed(heartbeat, 9000);
 		}
 	};
 
 
-	public static void sendToServer(final String phpParams, final String methodName, final MainMenuActivity mainMenu, final SelectquizActivity selectQuiz, final QuestionActivity question, final ResultActivity result)
+	static void sendToServer(final String phpParams, final String methodName, final MainMenuActivity mainMenu, final QuestionActivity question, final ResultActivity result)
 	{
 		new Thread(new Runnable()
 		{
@@ -58,7 +57,7 @@ public class PHPService
 
 					String text = br.readLine();
 					while (text != null) {
-						phpOutput.append(text + "\n");
+						phpOutput.append(text).append("\n");
 						text = br.readLine();
 					}
 
@@ -77,11 +76,6 @@ public class PHPService
 						{
 							Method method = mainMenu.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
 							method.invoke(mainMenu, phpOutput.toString());
-						}
-						else if (selectQuiz != null)
-						{
-							Method method = selectQuiz.getClass().getMethod(methodName, (new Class[1])[0] = String.class);
-							method.invoke(selectQuiz, phpOutput.toString());
 						}
 						else if (question != null)
 						{

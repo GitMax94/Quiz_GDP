@@ -1,14 +1,9 @@
 package com.uni.gdp.quiz_gdp;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,12 +12,10 @@ import android.widget.Toast;
 public class MainMenuActivity extends AppCompatActivity
 {
 
-	TextView et_name;
+	TextView tv_playerName;
 	Button b_startquiz;
-	Button b_leaderboard;
-	Button b_player;
-	TextView tv_message_p2;
-	String player = "Spieler1";
+	Button b_player1;
+	Button b_player2;
 	MainMenuActivity mma;
 
     @Override
@@ -31,121 +24,74 @@ public class MainMenuActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
 
-		et_name = (TextView)findViewById(R.id.et_name_old);
+		tv_playerName = (TextView)findViewById(R.id.tv_playerName);
 		b_startquiz = (Button) findViewById(R.id.b_startquiz);
-		b_leaderboard = (Button) findViewById(R.id.b_leaderboard);
-		tv_message_p2 = (TextView)findViewById(R.id.tv_message_p2);
-		b_player = (Button) findViewById(R.id.b_player);
+		b_player1 = (Button) findViewById(R.id.b_player1);
+		b_player2 = (Button) findViewById(R.id.b_player2);
 
-
-		DataRepo.name = "";
-		DataRepo.uuid = "";
-
-		DataRepo.localData = getSharedPreferences("data_local", Activity.MODE_PRIVATE);
-		DataRepo.name = DataRepo.localData.getString("name", DataRepo.name);
-		DataRepo.uuid = DataRepo.localData.getString("uuid", DataRepo.uuid);
-
-		if (DataRepo.name.isEmpty() || DataRepo.uuid.isEmpty())
-		{
-			startActivity(new Intent(MainMenuActivity.this, LoginActivity.class));
-			finish();
-		}
-
-
-
-
-
-
-
-		PHPService.sendToServer("?func=get_quizzes", "setQuizzes", this, null, null, null);
-		//PHPService.sendToServer("?func=add_user&userName=" + player, "addUser", this, null, null, null);
-		//PHPService.sendToServer("?func=add_user&userId=1243&name=Max", "addUser", this, null, null, null);
-		PHPService.heartbeat.run();
-
-		//http://cbrell.de/bwi50207/181/op995204/QuizService.php?func=add_user&userId=1243&name=Max
-
-		//PHPService.sendToServer("", "test", this, null);
-
-
-		et_name.setText(DataRepo.name);
-
-		//TODO Load properly, see DataRepo.java for classes
-		//DataRepo.quizzes = TestService.MakeTestQuizzes(20);
-		//DataRepo.leaderboard = TestService.MakeTestLeaderboard(10);
-
-
+		DataRepo.name = "Spieler1";
 		mma = this;
+		PHPService.sendToServer("?func=get_quizzes", "setQuiz", this, null, null);
+		PHPService.heartbeat.run();
 
 		b_startquiz.setOnClickListener( new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				PHPService.sendToServer("?func=add_user&userName=" + player + "&userId=" + DataRepo.uuid + "&name" + DataRepo.name, "addUser", mma, null, null, null);
+				PHPService.sendToServer("?func=add_user&userName=" + DataRepo.name + "&userId=" + "0000" + "&name" + DataRepo.name, "addUser", mma, null, null);
 			}
 		});
 
-
-		b_player.setOnClickListener( new View.OnClickListener()
+		b_player1.setOnClickListener( new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				if (player.equals("Spieler1"))
-				{
-					player = "Spieler2";
-				}
-				else
-				{
-					player = "Spieler1";
-				}
-				b_player.setText(player);
+				DataRepo.name = "Spieler1";
+				tv_playerName.setText(DataRepo.name);
+			}
+		});
+
+		b_player2.setOnClickListener( new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				DataRepo.name = "Spieler2";
+				tv_playerName.setText(DataRepo.name);
 			}
 		});
     }
 
 
-
-	void setQuizzes(String s)
+	//from PHP
+	void setQuiz(String s)
 	{
-		String[] lines = s.split("<br>");
-		DataRepo.quizzes = new Quiz[lines.length-1];
+		String[] line = s.split("<br>")[0].split(";");
+		DataRepo.quiz = new Quiz();
 
-		for (int i = 0; i < lines.length-1; i++)
+		DataRepo.quiz.name = line[0];
+		DataRepo.quiz.questions = new Question[(line.length-1)/6];
+		int k = 0;
+		for (int j = 1; j < line.length; j+=6)
 		{
-			String[] line = lines[i].split(";");
-			DataRepo.quizzes[i] = new Quiz();
-
-			DataRepo.quizzes[i].name = line[0];
-			DataRepo.quizzes[i].questions = new Question[(line.length-1)/6];
-			int k = 0;
-			for (int j = 1; j < line.length; j+=6)
-			{
-				DataRepo.quizzes[i].questions[k] = new Question();
-				DataRepo.quizzes[i].questions[k].question = line[j];
-				DataRepo.quizzes[i].questions[k].correctId = Integer.parseInt(line[j+1]);
-				DataRepo.quizzes[i].questions[k].answers = new String[4];
-				DataRepo.quizzes[i].questions[k].answers[0] = line[j+2];
-				DataRepo.quizzes[i].questions[k].answers[1] = line[j+3];
-				DataRepo.quizzes[i].questions[k].answers[2] = line[j+4];
-				DataRepo.quizzes[i].questions[k].answers[3] = line[j+5];
-				k++;
-			}
+			DataRepo.quiz.questions[k] = new Question();
+			DataRepo.quiz.questions[k].question = line[j];
+			DataRepo.quiz.questions[k].correctId = Integer.parseInt(line[j+1]);
+			DataRepo.quiz.questions[k].answers = new String[4];
+			DataRepo.quiz.questions[k].answers[0] = line[j+2];
+			DataRepo.quiz.questions[k].answers[1] = line[j+3];
+			DataRepo.quiz.questions[k].answers[2] = line[j+4];
+			DataRepo.quiz.questions[k].answers[3] = line[j+5];
+			k++;
 		}
-
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(getBaseContext(), "Loaded Quiz", Toast.LENGTH_LONG).show();
-			}
-		});
 	}
 
+	//from PHP
 	void addUser(String s)
 	{
-		DataRepo.name = player;
-		DataRepo.opponentName = player.equals("Spieler1") ? "Spieler2" : "Spieler1";
-		DataRepo.currentQuiz = 0;
+		DataRepo.opponentName = DataRepo.name.equals("Spieler1") ? "Spieler2" : "Spieler1";
 		DataRepo.currentQuestion = 0;
 		DataRepo.currentPoints = 0;
 		startActivity(new Intent(MainMenuActivity.this, QuestionActivity.class));

@@ -30,8 +30,6 @@ public class QuestionActivity extends AppCompatActivity
         ab = getSupportActionBar();
 		ab.setTitle("Frage " + (DataRepo.currentQuestion+1));
 
-
-
 		tv_question = (TextView)findViewById(R.id.tv_question);
 		b_answer1 = (Button)findViewById(R.id.b_answer1);
 		b_answer2 = (Button)findViewById(R.id.b_answer2);
@@ -74,36 +72,31 @@ public class QuestionActivity extends AppCompatActivity
 	private void SetQuestion()
 	{
 		ab.setTitle("Frage " + (DataRepo.currentQuestion+1));
-		tv_question.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].question);
-		tv_question.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].question + " (" + (DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].correctId) + ")");
-		b_answer1.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[0]);
-		b_answer2.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[1]);
-		b_answer3.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[2]);
-		b_answer4.setText(DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].answers[3]);
+		tv_question.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].question);
+		b_answer1.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[0]);
+		b_answer2.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[1]);
+		b_answer3.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[2]);
+		b_answer4.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[3]);
 	}
 
 	private void Answer(int id)
 	{
-		if (DataRepo.currentQuestion < DataRepo.quizzes[DataRepo.currentQuiz].questions.length)
+		if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 		{
-
-			if (DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].correctId == id+1)
+			if (DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == id+1)
 				DataRepo.currentPoints++;
 
+			String phpIsCorrect = DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == (id+1) ? "true" : "false";
 
-			String phpCurrentQuestion = DataRepo.currentQuestion == DataRepo.quizzes[DataRepo.currentQuiz].questions.length-1 ? "last" : DataRepo.currentQuestion + "";
-			String phpIsCorrect = DataRepo.quizzes[DataRepo.currentQuiz].questions[DataRepo.currentQuestion].correctId == (id+1) ? "true" : "false";
-
-			PHPService.sendToServer("?func=answer&userName=" + DataRepo.name + "&answerId=" + (id+1) + "&isCorrect=" + phpIsCorrect + "&totalPoints=" + DataRepo.currentPoints, "", null, null, null, null);
+			PHPService.sendToServer("?func=answer&userName=" + DataRepo.name + "&answerId=" + (id+1) + "&isCorrect=" + phpIsCorrect + "&totalPoints=" + DataRepo.currentPoints, "", null, null, null);
 			DataRepo.currentQuestion++;
-			if (DataRepo.currentQuestion < DataRepo.quizzes[DataRepo.currentQuiz].questions.length)
+			if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 			{
 				SetQuestion();
 			}
 			else
 			{
 				Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
-				//intent.addFlags(Intent.);
 				startActivity(intent);
 				finish();
 			}
@@ -111,22 +104,6 @@ public class QuestionActivity extends AppCompatActivity
 	}
 
 	@Override
-	public void onBackPressed() {
-		if (doubleBackToExitPressedOnce) {
-			super.onBackPressed();
-			return;
-		}
-
-		this.doubleBackToExitPressedOnce = true;
-		Toast.makeText(this, "Drücken Sie noch einmal zurück um das Quiz abzubrechen", Toast.LENGTH_SHORT).show();
-		new Handler().postDelayed(new Runnable() {
-
-			@Override
-			public void run()
-			{
-				doubleBackToExitPressedOnce = false;
-			}
-		}, 3000);
-	}
+	public void onBackPressed() {}
 
 }
