@@ -70,7 +70,7 @@ $array3[$zeile3] = $csvLesen3; 																										//Doppel Array, [Zeile]
 $zeile3++;
 }
 
-
+}
  $zeile2 = 0;
  $array2 = array();
  $lesen2 = fopen("SpielerListe.csv", "r");																								//fgetcsv: Liest eine Zeile von der Position des Dateizeigers und prüft diese auf Semikolon-Separierte-Werte (CSV)
