@@ -160,13 +160,6 @@ echo "</div>";
 window.setTimeout("location.reload()",3000);
 </script>
 
-<colgroup>
-  <!-- tabelen Weite -->
-<col width="26%">
-<col width="13%">
-<col width="13%">
-<col width="13%">
-</colgroup>
 
 
 
