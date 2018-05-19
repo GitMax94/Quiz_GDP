@@ -111,7 +111,7 @@ $rAntwort = $richtig+1+$i;
 $s1Antwort = $array4[$z][0]+1+$i;
 $s2Antwort = $array5[$z][0]+1+$i;
 
-if($zeile3<$i)
+if($zeile3>=$i)
 {
 
   if($s1Antwort==$rAntwort){
@@ -125,7 +125,7 @@ if($zeile3<$i)
 }
 else{  $s1 = "normal"; $antwort3="Warte auf Antwort";}
 
-if($zeile4<=$i)
+if($zeile4>=$i)
 {
   if($s2Antwort==$rAntwort){
   $s2 = "richtig";  $antwort4=$array4[$quizID-1][$s2Antwort];
