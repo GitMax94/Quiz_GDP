@@ -30,14 +30,12 @@ function add_user($userName){																	//Erstellt die Csv für Spieler1 u
 		if($userName == "Spieler2"){
 			unlink("Spieler2.csv");
 		}
-	}
-	$saveRow = " ";																				
+	}																			
 	$save = fopen("Spieler1.csv", "a");															//Erstellung der Spieler1.csv 
-	fwrite($save, $saveRow);
+	fwrite($save);
 	fclose($save);
-	$saveRow = " ";
 	$save = fopen("Spieler2.csv", "a");
-	fwrite($save, $saveRow);
+	fwrite($save);
 	fclose($save);
 }
 
