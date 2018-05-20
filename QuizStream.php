@@ -34,7 +34,7 @@
 		}
     </style>
 	<head> <title>Quiz Stream</title>
-		<?php																				//PHP Teil
+		<?php																			//PHP Teil
 			$quizID = $array1[$zeile-1][0];
 			$zeile3 = 0;
 			$array3 = array();															//array3 = Fragen.csv							
@@ -64,7 +64,7 @@
 				$zeile5++;
 			}
 
-			if($zeile4 == 0){												//If-Abfrage damit am Anfang die Punkte = 0 sind und nicht leer
+			if($zeile4 == 0){																//If-Abfrage damit am Anfang die Punkte = 0 sind und nicht leer
 				$punkte1="0";
 			}else{
 				$punkte1=$array4[$zeile4-1][2];												//Ansonsten werden die Punkte übermittelt die der Spieler1 erreicht hat
