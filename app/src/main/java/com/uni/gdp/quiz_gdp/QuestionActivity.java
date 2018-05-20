@@ -116,7 +116,7 @@ public class QuestionActivity extends AppCompatActivity
 			}
 			else
 			{
-				//was last question go to results
+				//was last question: go to results
 				Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
 				startActivity(intent);
 				finish();

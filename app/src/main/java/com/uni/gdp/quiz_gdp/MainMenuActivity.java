@@ -1,13 +1,11 @@
 package com.uni.gdp.quiz_gdp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainMenuActivity extends AppCompatActivity
 {
@@ -37,7 +35,6 @@ public class MainMenuActivity extends AppCompatActivity
 
 		//gets the questions and answers etc from server, invokes setQuiz
 		PHPService.sendToServer("?func=get_quiz", "setQuiz", this, null, null);
-
 
 		//set up button-press code
 		b_startquiz.setOnClickListener( new View.OnClickListener()
