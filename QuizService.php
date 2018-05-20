@@ -6,7 +6,7 @@ $answerId = $_GET['answerId'];
 $isCorrect = $_GET['isCorrect'];
 $totalPoints = $_GET['totalPoints'];
 
-if(isset($func)){				//Auswahl Funktion
+if(isset($func)){																						//Auswahlfunktion
 	if ($func == "add_user"){
 		add_user($userName);
 	}
