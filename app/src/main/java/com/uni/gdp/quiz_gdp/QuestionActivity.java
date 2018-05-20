@@ -93,6 +93,7 @@ public class QuestionActivity extends AppCompatActivity
 	{
 		if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 		{
+			//toast result of an answer and adds points
 			if (DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == id+1)
 			{
 				DataRepo.currentPoints++;
@@ -104,16 +105,18 @@ public class QuestionActivity extends AppCompatActivity
 				Toast.makeText(this, "Falsch! (" + correctAnswer + ")", Toast.LENGTH_LONG).show();
 			}
 
+			//sends to php various data about the answer
 			String phpIsCorrect = DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == (id+1) ? "true" : "false";
-
 			PHPService.sendToServer("?func=answer&userName=" + DataRepo.name + "&answerId=" + (id+1) + "&isCorrect=" + phpIsCorrect + "&totalPoints=" + DataRepo.currentPoints, "GetOpponent", null, this, null);
 			DataRepo.currentQuestion++;
 			if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 			{
+				//go to next question
 				SetQuestion();
 			}
 			else
 			{
+				//was last question go to results
 				Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
 				startActivity(intent);
 				finish();
@@ -121,12 +124,14 @@ public class QuestionActivity extends AppCompatActivity
 		}
 	}
 
+	//sets the opponent points from php
 	public void GetOpponent(String s)
 	{
 		DataRepo.opponentPoints = Integer.parseInt(s.trim());
 		SetQuestion();
 	}
 
+	//disables return button from android
 	@Override
 	public void onBackPressed() {}
 

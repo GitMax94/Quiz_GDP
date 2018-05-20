@@ -22,19 +22,23 @@ public class ResultActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result);
 
+		//sets layout items
 		tv_result = (TextView)findViewById(R.id.tv_result);
 		tv_result_title2 = (TextView)findViewById(R.id.tv_result_title2);
 		tv_result_opponent = (TextView)findViewById(R.id.tv_result_opponent);
 		tv_final = (TextView)findViewById(R.id.tv_final);
 
+		//sets texts on load of activity
 		tv_result.setText(DataRepo.currentPoints + " / " + DataRepo.quiz.questions.length);
 		tv_result_opponent.setText(DataRepo.opponentPoints + " / " + DataRepo.quiz.questions.length);
 		tv_result_title2.setText(DataRepo.opponentName + " Ergebnis:");
 		ra = this;
 
+		//runs heartbeat see below
 		heartbeat.run();
 	}
 
+	//starts a php request every 9 seconds
 	final static Handler hbHandler = new Handler();
 	static Runnable heartbeat = new Runnable()
 	{
@@ -47,7 +51,7 @@ public class ResultActivity extends AppCompatActivity {
 		}
 	};
 
-	//from php
+	//php output from heartbeat, sets opponent points and current question
 	void checkOpponent(String hb)
 	{
 		String[] items = hb.split(";");
