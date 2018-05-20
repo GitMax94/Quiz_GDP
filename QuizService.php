@@ -1,12 +1,12 @@
 <?php
 
-$func = $_GET['func'];
+$func = $_GET['func'];																			//Einlesen der Variable
 $userName = $_GET['userName'];
 $answerId = $_GET['answerId'];
 $isCorrect = $_GET['isCorrect'];
 $totalPoints = $_GET['totalPoints'];
 
-if(isset($func)){
+if(isset($func)){																				
 	if ($func == "add_user"){
 		add_user($userName);
 	}
@@ -21,41 +21,40 @@ if(isset($func)){
 	}
 }
 
-function add_user($userName){
-	if(file_exists("Spieler1.csv")){
-		if($userName == "Spieler1"){
-			unlink("Spieler1.csv");}
+function add_user($userName){																	//Erstellt die Csv für Spieler1 und Spieler2 bzw. löscht sie falls schon vorhanden von der vorherigen Nutzung																	
+	if(file_exists("Spieler1.csv")){															
+		if($userName == "Spieler1"){	
+			unlink("Spieler1.csv");}															//Falls Spieler1.csv vorhanden ist wird sie gelöscht
 		}
 	if(file_exists("Spieler2.csv")){
 		if($userName == "Spieler2"){
 			unlink("Spieler2.csv");
 		}
 	}
-	$saveRow = " ";
-	$save = fopen("Spieler1.csv", "a");
+	$saveRow = " ";																				
+	$save = fopen("Spieler1.csv", "a");															//Erstellung der Spieler1.csv 
 	fwrite($save, $saveRow);
 	fclose($save);
 	$saveRow = " ";
 	$save = fopen("Spieler2.csv", "a");
 	fwrite($save, $saveRow);
 	fclose($save);
-	$zeitstempel = time();
 }
 
-function answer($userName,$answerId,$isCorrect,$totalPoints){
+function answer($userName,$answerId,$isCorrect,$totalPoints){									//Speichert die Fragen ID, korrekte Antwort (true/false) und die gesamten Punkte von Spieler1 und Spieler2
 	if($userName == "Spieler1"){
-		$saveRow = $answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
+		$saveRow = $answerId.';'.$isCorrect.';'.$totalPoints."\r\n";							
 		$save = fopen("Spieler1.csv", "a");
-		fwrite($save, $saveRow);
+		fwrite($save, $saveRow);																//Schreibt die ID der Frage, ob die Frage korrekt war und die Punkte in die Spieler1.csv
 		fclose($save);
 		$zeile2 = 0;
 		$array2 = array();
-		$lesen2 = fopen("Spieler2.csv", "r");
+		$lesen2 = fopen("Spieler2.csv", "r");													//Einlesen der Spieler2.csv 
 		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){
-			$array2[$zeile2] = $csvLesen2;
+			$array2[$zeile2] = $csvLesen2;														//Doppel-Array: [Zeile][0=answerId][1=isCorrect][2=totalPoints]
 			$zeile2++;
 		}
-	$points=$array2[$zeile2-1][2];
+	$points=$array2[$zeile2-1][2];																//Speichern der Punkte 
 
 	}elseif($userName == "Spieler2"){
 		$saveRow = $answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
@@ -72,10 +71,10 @@ function answer($userName,$answerId,$isCorrect,$totalPoints){
 		$points = $array2[$zeile2-1][2];
 
 	}
-	echo $points;
+	echo $points;																				//Ausgabe der Punkte 
 }
 
-function heartbeat($userName){
+function heartbeat($userName){																	//Übergabe der gegner Punkte und Frage
 	if($userName == "Spieler1"){
 		$zeile2 = 0;
 		$array2 = array();
@@ -100,7 +99,7 @@ function heartbeat($userName){
 	echo $points.';'.$questions;
 }
 
-function FragenSenden(){
+function FragenSenden(){																		//Einlesen der Fragen und senden an die App
 	if(file_exists("Fragen.csv")){
 		$zeile = 0;
 		$array = array();
