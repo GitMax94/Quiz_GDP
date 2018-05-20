@@ -33,6 +33,7 @@ public class QuestionActivity extends AppCompatActivity
         ab = getSupportActionBar();
 		ab.setTitle("Frage " + (DataRepo.currentQuestion+1) + " (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")");
 
+		//gets the Buttons from layout
 		tv_question = (TextView)findViewById(R.id.tv_question);
 		b_answer1 = (Button)findViewById(R.id.b_answer1);
 		b_answer2 = (Button)findViewById(R.id.b_answer2);
@@ -41,6 +42,7 @@ public class QuestionActivity extends AppCompatActivity
 
 		SetQuestion();
 
+		//calls answer(int) method with answer id
 		b_answer1.setOnClickListener( new View.OnClickListener()
 		{
 			@Override
@@ -72,6 +74,7 @@ public class QuestionActivity extends AppCompatActivity
 
     }
 
+    //writes question and answers to layout
 	private void SetQuestion()
 	{
 		if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
@@ -85,6 +88,7 @@ public class QuestionActivity extends AppCompatActivity
 		}
 	}
 
+	//gets invoked when any answer clicked
 	private void Answer(int id)
 	{
 		if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
@@ -115,13 +119,6 @@ public class QuestionActivity extends AppCompatActivity
 				finish();
 			}
 		}
-
-
-
-
-
-
-
 	}
 
 	public void GetOpponent(String s)

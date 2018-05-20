@@ -1,11 +1,6 @@
 package com.uni.gdp.quiz_gdp;
 
-import android.content.SharedPreferences;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
+//static variables to save data in one place to be used in multiple activities
 class DataRepo
 {
 	static String name;
@@ -13,17 +8,17 @@ class DataRepo
 	static int currentQuestion;
     static int currentPoints;
 	static int opponentPoints;
-
 	static Quiz quiz;
 }
 
+//represents the quiz itself
 class Quiz
 {
 	String name;
-	int bestScore;
 	Question[] questions;
 }
 
+//represents single question in the quiz
 class Question
 {
     String question;
