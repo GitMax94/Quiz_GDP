@@ -3,10 +3,12 @@ package com.uni.gdp.quiz_gdp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -88,7 +90,15 @@ public class QuestionActivity extends AppCompatActivity
 		if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 		{
 			if (DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == id+1)
+			{
 				DataRepo.currentPoints++;
+				Toast.makeText(this, "Richtig!", Toast.LENGTH_LONG).show();
+			}
+			else
+			{
+				String correctAnswer = DataRepo.quiz.questions[DataRepo.currentQuestion].answers[DataRepo.quiz.questions[DataRepo.currentQuestion].correctId-1];
+				Toast.makeText(this, "Falsch! (" + correctAnswer + ")", Toast.LENGTH_LONG).show();
+			}
 
 			String phpIsCorrect = DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == (id+1) ? "true" : "false";
 
@@ -105,6 +115,13 @@ public class QuestionActivity extends AppCompatActivity
 				finish();
 			}
 		}
+
+
+
+
+
+
+
 	}
 
 	public void GetOpponent(String s)
