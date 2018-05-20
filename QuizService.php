@@ -30,14 +30,12 @@ function add_user($userName){																	//Erstellt die Csv für Spieler1 u
 		if($userName == "Spieler2"){
 			unlink("Spieler2.csv");
 		}
-	}
-	$saveRow = " ";																				
+	}																			
 	$save = fopen("Spieler1.csv", "a");															//Erstellung der Spieler1.csv 
-	fwrite($save, $saveRow);
+	fwrite($save);
 	fclose($save);
-	$saveRow = " ";
 	$save = fopen("Spieler2.csv", "a");
-	fwrite($save, $saveRow);
+	fwrite($save);
 	fclose($save);
 }
 
@@ -58,7 +56,7 @@ function answer($userName,$answerId,$isCorrect,$totalPoints){									//Speicher
 
 	}elseif($userName == "Spieler2"){
 		$saveRow = $answerId.';'.$isCorrect.';'.$totalPoints."\r\n";
-		$save = fopen("Spieler2.csv", "a");
+		$save = fopen("Spieler2.csv", "a");													
 		fwrite($save, $saveRow);
 		fclose($save);
 		$zeile2 = 0;
@@ -78,7 +76,7 @@ function heartbeat($userName){																	//Übergabe der gegner Punkte und
 	if($userName == "Spieler1"){
 		$zeile2 = 0;
 		$array2 = array();
-		$lesen2 = fopen("Spieler2.csv", "r");
+		$lesen2 = fopen("Spieler2.csv", "r");													//Spieler2.csv wird eingelesen
 		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){
 			$array2[$zeile2] = $csvLesen2;
 			$zeile2++;
@@ -88,7 +86,7 @@ function heartbeat($userName){																	//Übergabe der gegner Punkte und
 	}else{
 		$zeile2 = 0;
 		$array2 = array();
-		$lesen2 = fopen("Spieler1.csv", "r");
+		$lesen2 = fopen("Spieler1.csv", "r");													//Spieler1.csv wird eingelesen
 		while(($csvLesen2 = fgetcsv($lesen2, 1000, ";")) !== FALSE){
 			$array2[$zeile2] = $csvLesen2;
 			$zeile2++;
@@ -103,7 +101,7 @@ function FragenSenden(){																		//Einlesen der Fragen und senden an di
 	if(file_exists("Fragen.csv")){
 		$zeile = 0;
 		$array = array();
-		$lesen = fopen("Fragen.csv", "r");
+		$lesen = fopen("Fragen.csv", "r");														//Fragen.csv wird eingelesen
 		while(($csvLesen = fgetcsv($lesen, 100000, ";")) !== FALSE){
 			$LaengeArray = count($csvLesen);
 			$i=0;
@@ -118,7 +116,7 @@ function FragenSenden(){																		//Einlesen der Fragen und senden an di
 			}
 		}
 	}
-	echo $text;
+	echo $text;																					//Übergabe des Quizes
 }
 
 ?>
