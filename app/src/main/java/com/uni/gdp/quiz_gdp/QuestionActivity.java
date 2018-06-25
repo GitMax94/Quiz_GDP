@@ -88,6 +88,7 @@ public class QuestionActivity extends AppCompatActivity
 		}
 	}
 
+
 	//gets invoked when any answer clicked
 	private void Answer(int id)
 	{
