@@ -97,17 +97,18 @@ public class QuestionActivity extends AppCompatActivity
 			if (DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == id+1)
 			{
 				DataRepo.currentPoints++;
-				Toast.makeText(this, "Richtig!"+" (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Richtig!"+" (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")", Toast.LENGTH_SHORT).show();
 			}
 			else
 			{
 				String correctAnswer = DataRepo.quiz.questions[DataRepo.currentQuestion].answers[DataRepo.quiz.questions[DataRepo.currentQuestion].correctId-1];
-				Toast.makeText(this, "Falsch! (" + correctAnswer + ")"+" (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Falsch! (" + correctAnswer + ")"+" (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")", Toast.LENGTH_SHORT).show();
 			}
 
 			//sends to php various data about the answer
 			String phpIsCorrect = DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == (id+1) ? "true" : "false";
-			PHPService.sendToServer("?func=answer&userName=" + DataRepo.name + "&answerId=" + (id+1) + "&isCorrect=" + phpIsCorrect + "&totalPoints=" + DataRepo.currentPoints, "GetOpponent", null, this, null);
+			PHPService.sendToServer("?func=answer&userName=" + DataRepo.name + "&answerId=" + (id+1) + "&isCorrect=" + phpIsCorrect + "&totalPoints=" + DataRepo.currentPoints,
+									"GetOpponent", null, this, null);
 			DataRepo.currentQuestion++;
 			if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 			{
