@@ -31,7 +31,7 @@ public class QuestionActivity extends AppCompatActivity
         setContentView(R.layout.activity_question);
 
         ab = getSupportActionBar();
-		ab.setTitle("Frage " + (DataRepo.currentQuestion+1) + " (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")");
+		ab.setTitle("Quiz" );
 
 		//gets the Buttons from layout
 		tv_question = (TextView)findViewById(R.id.tv_question);
@@ -79,7 +79,7 @@ public class QuestionActivity extends AppCompatActivity
 	{
 		if (DataRepo.currentQuestion < DataRepo.quiz.questions.length)
 		{
-			ab.setTitle("Frage " + (DataRepo.currentQuestion+1) + " (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")");
+
 			tv_question.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].question);
 			b_answer1.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[0]);
 			b_answer2.setText(DataRepo.quiz.questions[DataRepo.currentQuestion].answers[1]);
@@ -97,12 +97,12 @@ public class QuestionActivity extends AppCompatActivity
 			if (DataRepo.quiz.questions[DataRepo.currentQuestion].correctId == id+1)
 			{
 				DataRepo.currentPoints++;
-				Toast.makeText(this, "Richtig!", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Richtig!"+" (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")", Toast.LENGTH_LONG).show();
 			}
 			else
 			{
 				String correctAnswer = DataRepo.quiz.questions[DataRepo.currentQuestion].answers[DataRepo.quiz.questions[DataRepo.currentQuestion].correctId-1];
-				Toast.makeText(this, "Falsch! (" + correctAnswer + ")", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Falsch! (" + correctAnswer + ")"+" (" + DataRepo.currentPoints + " vs " + DataRepo.opponentPoints + ")", Toast.LENGTH_LONG).show();
 			}
 
 			//sends to php various data about the answer
